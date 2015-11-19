@@ -1,0 +1,65 @@
+
+$background: #1F1F1F;
+$primarycolor: #9C0010;
+$primarycolor_accentdark: #73000B;
+$primarycolor_accentlight: #FFB5BD;
+$primarycolor_light: #FFFFFF;
+
+
+body {
+	background-color: $background;
+	font-size: .9em;
+}
+
+.container {
+	width: 90%;
+	margin: 0 auto;
+}
+
+/*
+Navigation Styling
+*/
+
+.navbar {
+	border: none;
+	border-radius: 0px;
+	background-color: $primarycolor;
+	color: $primarycolor_light;
+	width: 100%;
+}
+
+.navbar-brand {
+	margin-right: 50px;
+}
+
+.navbar-default .navbar-brand {
+	color: $primarycolor_light;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: .99rem;
+}
+
+.navbar-btn {
+	background-color: $primarycolor_accentdark;
+	border: none;
+	margin-left: 20px;
+	padding-right: 15px;
+	padding-left: 15px;
+	color: $primarycolor_light;
+	letter-spacing: 2px;
+}
+
+
+/*
+Filter Styling
+*/
+
+.btn-default {
+	background-color: $primarycolor;
+	border: none;
+	margin-left: 20px;
+	padding-right: 15px;
+	padding-left: 15px;
+	color: $primarycolor_light;
+	letter-spacing: 2px;
+}

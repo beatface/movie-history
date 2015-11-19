@@ -1,3 +1,49 @@
+body {
+  background-color: #1F1F1F;
+  font-size: .9em; }
 
+.container {
+  width: 90%;
+  margin: 0 auto; }
+
+/*
+Navigation Styling
+*/
+.navbar {
+  border: none;
+  border-radius: 0px;
+  background-color: #9C0010;
+  color: #FFFFFF;
+  width: 100%; }
+
+.navbar-brand {
+  margin-right: 50px; }
+
+.navbar-default .navbar-brand {
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: .99rem; }
+
+.navbar-btn {
+  background-color: #73000B;
+  border: none;
+  margin-left: 20px;
+  padding-right: 15px;
+  padding-left: 15px;
+  color: #FFFFFF;
+  letter-spacing: 2px; }
+
+/*
+Filter Styling
+*/
+.btn-default {
+  background-color: #9C0010;
+  border: none;
+  margin-left: 20px;
+  padding-right: 15px;
+  padding-left: 15px;
+  color: #FFFFFF;
+  letter-spacing: 2px; }
 
 /*# sourceMappingURL=main.css.map */
