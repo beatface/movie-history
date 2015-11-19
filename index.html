@@ -3,11 +3,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Joint team project - Movie History</title>
+  <title>Movie History</title>
   <link rel="stylesheet" type="text/css" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 
 <body>
+
+<section class="splash-login">
 
 	<div id="home-page">
 					  
@@ -24,6 +27,47 @@
 
 	</div>
 
-	<script data-main="javascripts/main.js" src="lib/bower_components/requirejs/require.js"></script>
+</section>
+
+
+<section class="mainpage">
+
+	<!-- NAVIGATION -->
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">Movie History</a>
+		    </div>
+		      <ul class="nav navbar-nav navbar-left">
+		        <li><button class="btn navbar-btn">Find Movies</button></li>
+		        <li><button class="btn navbar-btn">Search My Movies</button></li>
+		      </ul>
+		      <div id="logout-location" class="nav navbar-nav navbar-right">
+		        <button id="logout-button" class="btn navbar-btn">Log Out</button>
+		      </div>
+		  </div><!-- /.container-fluid -->
+		</nav>
+
+
+
+
+
+	<div class="container">
+
+		<!-- FILTER RESULTS -->
+
+		<div class="btn-group" role="group" aria-label="...">
+		  <button type="button" class="btn btn-default">Watched</button>
+		  <button type="button" class="btn btn-default">|</button>
+		  <button type="button" class="btn btn-default">Unwatched</button>
+		</div>
+
+	</div> <!--closes container that holds entire page -->
+</section>
+
+<!-- Javascript land -->
+<script data-main="javascripts/main.js" src="lib/bower_components/requirejs/require.js"></script>
+
 </body>
 </html>
