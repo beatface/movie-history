@@ -1,13 +1,11 @@
 {
-  "name": "modules",
-  "description": "",
-  "main": "",
+  "name": "lib",
+  "version": "0.0.0",
+  "homepage": "https://github.com/andrialexandrou/musichistory",
   "authors": [
-    "Amy Lee <amyleeannebennett@gmail.com>"
+    "Andri Alexandrou <andri.j.alexandrou@gmail.com>"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/albennett/movie-history",
-  "moduleType": [],
   "ignore": [
     "**/.*",
     "node_modules",
@@ -16,12 +14,13 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4",
-    "requirejs": "~2.1.21",
     "bootstrap": "~3.3.5",
+    "handlebars": "~4.0.4",  
+    "jquery": "~2.1.4",
     "q": "1.0.1",
+    "require-handlebars-plugin": "~1.0.0",
+    "requirejs": "~2.1.20",
     "firebase": "~2.3.2",
-    "handlebars": "~4.0.4",
-    "require-handlebars-plugin": "~1.0.0"
+    "grunt": "~0.4.5"
   }
 }
