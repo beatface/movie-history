@@ -33,7 +33,28 @@ require(["dependencies", "authcall", "return-users", "createuser", "q"],
         // Send email and password for login authentication
         .then(function(authData) {
           auth = authData;
+
           console.log("authData", authData.uid);
+
+          var usersFirebase = myFirebaseRef.child("users");
+          var userExists = false;
+
+          usersFirebase.once("value", function(dataSnap){
+            dataSnap.forEach(function(childSnap) {
+              if (childSnap.val().uid === authData.uid) {
+                userExists = true;
+              }
+            });
+
+            if (userExists === false) {
+              usersFirebase.push({
+                "uid": authData.uid,
+                "email": email,
+                "password": password
+              });
+            }
+
+          });
           return returnusers.retrieveUsers();
         })
         .fail(function(error) {
