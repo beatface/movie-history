@@ -2,9 +2,33 @@ body {
   background-color: #1F1F1F;
   font-size: .9em; }
 
-.container {
-  width: 90%;
-  margin: 0 auto; }
+/*
+Splash Styling
+*/
+#splash-login {
+  width: 50%;
+  input: 300px;
+  margin: 0 auto;
+  position: relative;
+  top: 100px; }
+  #splash-login h1 {
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px #73000B;
+    text-align: center;
+    margin-bottom: 50px; }
+  #splash-login input {
+    margin-bottom: 30px; }
+  #splash-login .signin-clickers {
+    width: 100%; }
+    #splash-login .signin-clickers button {
+      width: 48%;
+      background-color: #1F1F1F;
+      text-transform: uppercase;
+      margin: 0; }
+    #splash-login .signin-clickers .btn:hover {
+      color: #FFB5BD; }
 
 /*
 Navigation Styling
@@ -33,6 +57,9 @@ Navigation Styling
   padding-left: 15px;
   color: #FFFFFF;
   letter-spacing: 2px; }
+
+#logout-button {
+  margin-right: 15px; }
 
 /*
 Filter Styling

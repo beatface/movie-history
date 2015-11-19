@@ -10,27 +10,31 @@
 
 <body>
 
-<section id="entry-screen" class="page splash-login">
-
-	<div id="home-page">
+<section id="entry-screen" class="page">
 					  
-	  <div id="content">
+	  <div id="splash-login">
+
+	    <!-- Brand -->
+	    <h1>Movie History</h1>
+
+	    <!-- User inputs email/password for login/register -->
 	    <input class="middle form-control" type="text" id="email" placeholder="Enter Email">
 	    <input class="middle form-control" type="password" id="password" placeholder="Enter Password">
 
-	    <!-- Login -->
-	    <button class="middle page-turn btn btn-default" type="button" id="login" next="main-page">Login</button>
+	    <!-- Chooses to login or signup, if correct, loads .main-page -->
+	    <div class="signin-clickers">
+		    <!-- Login -->
+		    <button class="middle page-turn btn btn-default" type="button" id="login" next="main-page">Login</button>
 
-	    <!-- Signup -->
-	    <button class="middle page-turn btn btn-default" type="button" id="signupButton" next="main-page">Sign Up</button>
+		    <!-- Signup -->
+		    <button class="middle page-turn btn btn-default" type="button" id="signupButton" next="main-page">Sign Up</button>
+		</div><!-- closes .signin-clickers -->
 	  </div>
-
-	</div>
 
 </section>
 
 
-<section class="main-page">
+<section class="page main-page">
 
 	<!-- NAVIGATION -->
 		<nav class="navbar navbar-default">
@@ -50,20 +54,18 @@
 		</nav>
 
 
+	<div class="row">
+		<div id="basic" class="container col-md-9 col-md-offset-1"> <!-- holds main page where results load -->
 
+			<!-- FILTER RESULTS -->
 
-
-	<div class="container">
-
-		<!-- FILTER RESULTS -->
-
-		<div class="btn-group" role="group" aria-label="...">
-		  <button type="button" class="btn btn-default">Watched</button>
-		  <button type="button" class="btn btn-default">|</button>
-		  <button type="button" class="btn btn-default">Unwatched</button>
-		</div>
-
-	</div> <!--closes container that holds entire page -->
+			<div class="btn-group" role="group" aria-label="...">
+			  <button type="button" class="btn btn-default">Watched</button>
+			  <button type="button" class="btn btn-default">|</button>
+			  <button type="button" class="btn btn-default">Unwatched</button>
+			</div>
+		</div> <!--closes container that holds entire page -->
+	</div>
 </section>
 
 <!-- Javascript land -->

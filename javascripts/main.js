@@ -19,6 +19,7 @@ function(_$_, login, Q) {
 
 
 // Page turning functionality here, communicates with tags, classes and ids in index.html
+$("#user-to-filter").hide();
 
 $(".page").hide();
     $("#entry-screen").show();
@@ -33,7 +34,7 @@ $(".page").hide();
 
 //Instructions to add a page:
   // add page to index.html within <section class="page"> </section>
-  // in button that will submit info/turn page, add class="page-turn" and attribute next="<next page here>"
+  // in button that will submit info/turn page, add class="page-turn" and attribute next="<next page here>". Make sure class of 'next' page matches identically the text within next="" attribute.
 
 
 
