@@ -14,7 +14,7 @@ require.config({
 });
 
 require(
-["dependencies"], 
-function(_$_) {
+["dependencies", "login", "q"], 
+function(_$_, login, Q) {
 
 });
