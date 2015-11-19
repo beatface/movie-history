@@ -1,0 +1,24 @@
+{
+  "name": "modules",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Amy Lee <amyleeannebennett@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/albennett/movie-history",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.21",
+    "bootstrap": "~3.3.5",
+    "q": "1.0.1"
+  }
+}
