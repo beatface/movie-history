@@ -17,4 +17,25 @@ require(
 ["dependencies", "login", "q"], 
 function(_$_, login, Q) {
 
+
+// Page turning functionality here, communicates with tags, classes and ids in index.html
+
+$(".page").hide();
+    $("#entry-screen").show();
+    
+    $(".page-turn").click(function(e) {
+      var nextPage = $(this).attr("next");
+
+      $(".page").hide();
+      $("." + nextPage).show();
+
+    });
+
+//Instructions to add a page:
+  // add page to index.html within <section class="page"> </section>
+  // in button that will submit info/turn page, add class="page-turn" and attribute next="<next page here>"
+
+
+
+
 });
