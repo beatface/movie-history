@@ -19,6 +19,9 @@
     "jquery": "~2.1.4",
     "requirejs": "~2.1.21",
     "bootstrap": "~3.3.5",
-    "q": "1.0.1"
+    "q": "1.0.1",
+    "firebase": "~2.3.2",
+    "handlebars": "~4.0.4",
+    "require-handlebars-plugin": "~1.0.0"
   }
 }
