@@ -93,7 +93,9 @@ require(["dependencies", "authcall", "return-users", "createuser", "q"],
             
           }
         });
-
+        console.log("auth in login", auth);
     });
+
+    return {auth: auth};
 
     });

@@ -15,7 +15,7 @@ input[type=radio] {
   /* visibility: hidden; */ }
 
 /*
-Splash Styling
+Login/Sign up: splash page styling
 */
 #splash-login {
   width: 50%;
@@ -84,5 +84,24 @@ Filter Styling
   padding-left: 15px;
   color: #FFFFFF;
   letter-spacing: 2px; }
+
+/*
+Movie poster styling
+*/
+.poster {
+  position: relative;
+  border: 1px solid red; }
+
+img {
+  width: 100%; }
+
+.poster .glyphicon {
+  position: absolute;
+  top: 5px;
+  right: 5px; }
+
+input[type=radio] {
+  display: none;
+  /* visibility: hidden; */ }
 
 /*# sourceMappingURL=main.css.map */
