@@ -14,22 +14,21 @@ require.config({
 });
 
 require(
-["dependencies", "login", "q", "grabmovies"], 
-function(_$_, login, Q, grabMovies) {
+["dependencies", "login", "q", "logout", "grabmovies"], 
+function(_$_, login, Q, logout, grabMovies) {
 console.log("grabmovies", grabMovies);
+
 
 // Page turning functionality here, communicates with tags, classes and ids in index.html
 $("#user-to-filter").hide();
 
 $(".page").hide();
     $("#entry-screen").show();
-    
     $(".page-turn").click(function(e) {
       var nextPage = $(this).attr("next");
 
       $(".page").hide();
       $("." + nextPage).show();
-
     });
 
 

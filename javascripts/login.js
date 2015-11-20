@@ -13,10 +13,33 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
       signup = true;
       var email = $('#email').val();
       var password = $('#password').val();
-      createuser.createTheUser(email, password, myFirebaseRef)
+      createuser(email, password, myFirebaseRef)
       .then(function(authData) {
           auth = authData;
           console.log("authData from signup", authData);
+
+          var usersFirebase = myFirebaseRef.child("users");
+          var userExists = false;
+
+          console.log("usersFirebase", usersFirebase);
+          usersFirebase.once("value", function(dataSnap){
+            dataSnap.forEach(function(childSnap) {
+              if (childSnap.val().uid === authData.uid) {
+                userExists = true;
+              }
+            });
+
+            console.log("ANYTHING IN HERE??");
+            if (userExists === false) {
+              usersFirebase.push({
+                "uid": authData.uid,
+                "email": email,
+                "password": password
+              });
+            }
+
+          });
+
           return returnusers.retrieveUsers();
         })
       .fail(function(error) {
@@ -59,6 +82,16 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
         })
         .fail(function(error) {
           console.log("error", error);
+        });
+        console.log("authData", auth);
+        $("#logout-button").click(function(e) {
+          console.log("You have clicked the logout button!", auth);
+          if (auth) {
+            auth = null;
+            myFirebaseRef.unauth();
+            console.log("what's going on", auth);
+            
+          }
         });
 
     });

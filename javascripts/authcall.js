@@ -5,14 +5,17 @@ define(["dependencies", "q"], function(_$_, Q) {
 		var deferred = Q.defer();
 
 		myFirebaseRef.authWithPassword({
-	        email    : email,
-	        password : password
-	      }, function(error, authData) {
-	        if (error) {
-	          console.log("Login Failed!", error);
-	        } else { deferred.resolve(authData); }
-	    });
-	    return deferred.promise;
+        email    : email,
+        password : password
+      }, function(error, authData) {
+        if (error) {
+          console.log("Login Failed!", error);
+          deferred.reject(error);
+        } else { 
+        	deferred.resolve(authData);
+        }
+    });
+    return deferred.promise;
 	}
 
 	return authenticate;
