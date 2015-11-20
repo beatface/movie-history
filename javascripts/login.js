@@ -1,4 +1,4 @@
-require(["dependencies", "authcall", "return-users", "createuser", "q"], 
+define(["dependencies", "authcall", "return-users", "createuser", "q"], 
   function(_$_, authCall, returnusers, createuser, Q) {
     
     var myFirebaseRef = new Firebase("https://ama-moviehistory.firebaseio.com/");

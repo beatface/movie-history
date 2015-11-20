@@ -14,9 +14,9 @@ require.config({
 });
 
 require(
-["dependencies", "login", "q"], 
-function(_$_, login, Q) {
-
+["dependencies", "login", "q", "grabmovies"], 
+function(_$_, login, Q, grabMovies) {
+console.log("grabmovies", grabMovies);
 
 // Page turning functionality here, communicates with tags, classes and ids in index.html
 $("#user-to-filter").hide();
@@ -32,11 +32,15 @@ $(".page").hide();
 
     });
 
+
 //Instructions to add a page:
   // add page to index.html within <section class="page"> </section>
   // in button that will submit info/turn page, add class="page-turn" and attribute next="<next page here>". Make sure class of 'next' page matches identically the text within next="" attribute.
 
-
+$("#modal-search-btn").on("click", function(){
+  console.log("hellooo");
+  grabMovies.findMovie();
+});
 
 
 });

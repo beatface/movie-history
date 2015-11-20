@@ -10,7 +10,7 @@
 
 <body>
 	<!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+    <div class="modal fade" id="searchMovies" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -18,10 +18,10 @@
                     <h4 class="modal-title" id="myModalLabel">Search for a Movie by Title</h4>
                 </div>
                 <div class="modal-body">
+                	<input type='text' id='titleInput' placeholder='Title'>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-search-btn">Search</button>
-                    <button type="button" class="btn btn-primary" id="modal-login-btn">Login</button>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
 		      <a class="navbar-brand" href="#">Movie History</a>
 		    </div>
 		      <ul class="nav navbar-nav navbar-left">
-		        <li><button class="btn navbar-btn">Find Movies</button></li>
+		        <li><button class="btn navbar-btn" data-toggle="modal" data-target="#searchMovies">Find Movies</button></li>
 		        <li><button class="btn navbar-btn">Search My Movies</button></li>
 		      </ul>
 		      <div id="logout-location" class="nav navbar-nav navbar-right">
