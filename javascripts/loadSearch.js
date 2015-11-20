@@ -1,9 +1,9 @@
-define(["dependencies"], 
-  function(_$_) {
+define(["dependencies", "grabmovies"], 
+  function(_$_, grabmovies) {
 
      return {
 
-        populateMovies: function() { 
+        populateMovies: function(authInfo) { 
 
           var title = $("#titleInput").val();
           console.log("title", title);
@@ -20,6 +20,17 @@ define(["dependencies"],
               require(['hbs!../templates/each_movie'], function(getMovieTemplate){
                 $('#basic').html(getMovieTemplate(moviesArray));
               });
+
+              $(document).on("click", ".movie-add", function(e) {
+                console.log("You clicked add movie");
+                grabmovies.findMovie(movieData, moviesArray.poster, authInfo);
+
+              });
+
+              $("#titleInput").val(""); //leaves input empty
+
+
+
             });
         }
       };
