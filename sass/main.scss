@@ -11,10 +11,16 @@ body {
 	font-size: .9em;
 }
 
-// .container {
-// 	width: 90%;
-// 	margin: 0 auto;
-// }
+//This is to put the trash glyphicon over the image of the poster (hopefully)
+.poster {
+   position: relative;
+}
+
+.poster .glyphicon {
+   position: absolute;
+   top: 20px;
+   left: 40px;
+}
 
 /*
 Splash Styling

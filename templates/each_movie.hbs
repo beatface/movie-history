@@ -1,8 +1,17 @@
 {{#each movielibrary}}
-
-glyphicon glyphicon-trash
-
-
-
-
+<div class="col-xs-4">
+	<div class="poster">
+		<img src="{{poster}}">
+		<span class="glyphicon glyphicon-trash"></span>
+	</div>
+	<button class="movie-add">Add</button>
+	<button class="movie-watch">Watch</button>
+	<div class="stars">
+		<label class="radio-inline"><input type="radio" name="rating" value="1">1</label>
+		<label class="radio-inline"><input type="radio" name="rating" value="2">2</label>
+		<label class="radio-inline"><input type="radio" name="rating" value="3">3</label>
+		<label class="radio-inline"><input type="radio" name="rating" value="4">4</label>
+		<label class="radio-inline"><input type="radio" name="rating" value="5">5</label>
+	</div>
+</div>
 {{/each}}

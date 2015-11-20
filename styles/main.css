@@ -2,6 +2,14 @@ body {
   background-color: #1F1F1F;
   font-size: .9em; }
 
+.poster {
+  position: relative; }
+
+.poster .glyphicon {
+  position: absolute;
+  top: 20px;
+  left: 40px; }
+
 /*
 Splash Styling
 */
