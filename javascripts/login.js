@@ -1,5 +1,7 @@
 define(["dependencies", "authcall", "return-users", "createuser", "q"], 
   function(_$_, authCall, returnusers, createuser, Q) {
+    $(".page").hide();
+    $("#entry-screen").show();
     
     var myFirebaseRef = new Firebase("https://ama-moviehistory.firebaseio.com/");
 
@@ -38,6 +40,9 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
               });
             }
 
+            $(".main-page").show();
+            $("#entry-screen").hide();
+
           });
 
           return returnusers.retrieveUsers();
@@ -46,7 +51,8 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
           console.log("error", error);
         });
       console.log(signup);
-    });
+    }); // END SIGNUP FUNCTION]
+
 
     // User authentication, private process w/ Firebase
     $('#login').on("click", function(){
@@ -58,6 +64,12 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
           auth = authData;
 
           console.log("authData", authData.uid);
+          if (authData.uid) {
+            console.log("hello", authData.uid);
+            
+            $(".main-page").show();
+            $("#entry-screen").hide();
+          }
 
           var usersFirebase = myFirebaseRef.child("users");
           var userExists = false;
@@ -77,13 +89,16 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
               });
             }
 
+
           });
           return returnusers.retrieveUsers();
         })
         .fail(function(error) {
           console.log("error", error);
         });
-        console.log("authData", auth);
+
+
+        //Start logout function
         $("#logout-button").click(function(e) {
           console.log("You have clicked the logout button!", auth);
           if (auth) {
@@ -92,8 +107,10 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
             console.log("what's going on", auth);
             
           }
-        });
+        }); //END LOGOUT FUNCTION
 
-    });
+    }); //END LOGIN FUNCTION
 
-    });
+
+
+});// END REQUIRE FUCTION
