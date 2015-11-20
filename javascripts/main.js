@@ -32,10 +32,16 @@ $("#modal-search-btn").on("click", function(){
   grabMovies.findMovie();
 
   require(['hbs!../templates/each_movie'], function(getMovieTemplate){
-    $('#basic').html(getMovieTemplate());
+    $('#results').html(getMovieTemplate());
   });
+});
 
+$("#search-my-movie-library").on("click", function() {
+  console.log("should load my movie library");
 
+  require(['hbs!../templates/each_my_movies'], function(getMyMoviesTemplate) {
+    $("#results").html(getMyMoviesTemplate());
+  });
 });
 
 
