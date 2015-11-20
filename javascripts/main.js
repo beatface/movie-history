@@ -19,16 +19,7 @@ function(_$_, login, Q, logout) {
 
 
 // Page turning functionality here, communicates with tags, classes and ids in index.html
-$("#user-to-filter").hide();
 
-$(".page").hide();
-    $("#entry-screen").show();
-    $(".page-turn").click(function(e) {
-      var nextPage = $(this).attr("next");
-
-      $(".page").hide();
-      $("." + nextPage).show();
-    });
 
 //Instructions to add a page:
   // add page to index.html within <section class="page"> </section>
