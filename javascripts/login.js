@@ -60,6 +60,16 @@ require(["dependencies", "authcall", "return-users", "createuser", "q"],
         .fail(function(error) {
           console.log("error", error);
         });
+        console.log("authData", auth);
+        $("#logout-button").click(function(e) {
+          console.log("You have clicked the logout button!", auth);
+          if (auth) {
+            auth = null;
+            myFirebaseRef.unauth();
+            console.log("what's going on", auth);
+            
+          }
+        });
 
     });
 
