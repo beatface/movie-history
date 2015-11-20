@@ -30,14 +30,6 @@ console.log("grabmovies", grabMovies);
 
 //when search button on modal is clicked, then findMovie function happens
 
-$("#modal-search-btn").on("click", function(){
-  console.log("hellooo");
-  loadSearch.populateMovies();
-
-  require(['hbs!../templates/each_movie'], function(getMovieTemplate){
-    $('#results').html(getMovieTemplate());
-  });
-});
 
 $("#search-my-movie-library").on("click", function() {
   console.log("should load my movie library");

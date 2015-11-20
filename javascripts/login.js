@@ -1,5 +1,5 @@
-define(["dependencies", "authcall", "return-users", "createuser", "q"], 
-  function(_$_, authCall, returnusers, createuser, Q) {
+define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSearch"], 
+  function(_$_, authCall, returnusers, createuser, Q, loadSearch) {
     $(".page").hide();
     $("#entry-screen").show();
     
@@ -63,9 +63,7 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
         .then(function(authData) {
           auth = authData;
 
-          console.log("authData", authData.uid);
           if (authData.uid) {
-            console.log("hello", authData.uid);
             
             $(".main-page").show();
             $("#entry-screen").hide();
@@ -73,6 +71,11 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
 
           var usersFirebase = myFirebaseRef.child("users");
           var userExists = false;
+
+          console.log("this is yr auth where you need it", auth.uid);
+          $("#modal-search-btn").on("click", function(){
+            loadSearch.populateMovies(authData.uid);
+          });
 
           usersFirebase.once("value", function(dataSnap){
             dataSnap.forEach(function(childSnap) {

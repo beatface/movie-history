@@ -1,9 +1,9 @@
-define(["dependencies", "stars"], 
-  function(_$_, stars) {
+define(["dependencies", "stars", "grabmovies"], 
+  function(_$_, stars, grabmovies) {
 
      return {
 
-        populateMovies: function() { 
+        populateMovies: function(authInfo) { 
 
           var title = $("#titleInput").val();
           console.log("title", title);
@@ -21,6 +21,17 @@ define(["dependencies", "stars"],
                 $('#basic').html(getMovieTemplate(moviesArray));
                 $(".rating").rating();
               });
+
+              $(document).on("click", ".movie-add", function(e) {
+                console.log("You clicked add movie");
+                grabmovies.findMovie(movieData, moviesArray.poster, authInfo);
+
+              });
+
+              $("#titleInput").val(""); //leaves input empty
+
+
+
             });
         }
       };

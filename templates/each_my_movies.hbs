@@ -5,75 +5,6 @@
 </div>
 
 {{!-- TESTING GROUND --}}
-
-<!-- FIRST POSTER -->
-				<div class="col-md-4">
-					<div class="poster">
-						<img>
-						<span class="glyphicon glyphicon-trash"></span>
-					</div>
-					<button class="movie-add">Add</button>
-					<button class="movie-watch">Watch</button>
-					<div class="stars">
-						<label class="radio-inline"><input type="radio" name="rating" value="1"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="2"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="3"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="4"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="5"><span class="glyphicon glyphicon-star-empty"></span></label>
-					</div>
-				</div> <!-- closes this poster -->
-				<!-- SECOND POSTER -->
-				<div class="col-md-4">
-					<div class="poster">
-						<img>
-						<span class="glyphicon glyphicon-trash"></span>
-					</div>
-					<button class="movie-add">Add</button>
-					<button class="movie-watch">Watch</button>
-					<div class="stars">
-						<label class="radio-inline"><input type="radio" name="rating" value="1"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="2"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="3"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="4"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="5"><span class="glyphicon glyphicon-star-empty"></span></label>
-					</div>
-				</div> <!-- closes this poster -->
-				<!-- THIRD POSTER -->
-				<div class="col-md-4">
-					<div class="poster">
-						<img>
-						<span class="glyphicon glyphicon-trash"></span>
-					</div>
-					<button class="movie-add">Add</button>
-					<button class="movie-watch">Watch</button>
-					<div class="stars">
-						<label class="radio-inline"><input type="radio" name="rating" value="1"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="2"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="3"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="4"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="5"><span class="glyphicon glyphicon-star-empty"></span></label>
-					</div>
-				</div> <!-- closes this poster -->
-				<!-- FOURTH POSTER -->
-				<div class="col-md-4">
-					<div class="poster">
-						<img>
-						<span class="glyphicon glyphicon-trash"></span>
-					</div>
-					<button class="movie-add">Add</button>
-					<button class="movie-watch">Watch</button>
-					<div class="stars">
-						<label class="radio-inline"><input type="radio" name="rating" value="1"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="2"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="3"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="4"><span class="glyphicon glyphicon-star-empty"></span></label>
-						<label class="radio-inline"><input type="radio" name="rating" value="5"><span class="glyphicon glyphicon-star-empty"></span></label>
-					</div>
-				</div> <!-- closes this poster -->
-
-
-{{!-- END TESTING GROUND --}}
-
 {{#each MyMovieLibrary}}
 <div class="col-xs-4" key="{{@key}}">
 	<div class="poster">
@@ -82,11 +13,7 @@
 	</div>
 	<button class="movie-watch">Watch</button>
 	<div class="stars">
-		<label class="radio-inline"><input type="radio" name="rating" value="1"><span class="glyphicon glyphicon-star-empty"></span></label>
-		<label class="radio-inline"><input type="radio" name="rating" value="2"><span class="glyphicon glyphicon-star-empty"></span></label>
-		<label class="radio-inline"><input type="radio" name="rating" value="3"><span class="glyphicon glyphicon-star-empty"></span></label>
-		<label class="radio-inline"><input type="radio" name="rating" value="4"><span class="glyphicon glyphicon-star-empty"></span></label>
-		<label class="radio-inline"><input type="radio" name="rating" value="5"><span class="glyphicon glyphicon-star-empty"></span></label>
+		<input id="{{this}}" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false" data-show-caption="false" data-size="xs">
 	</div>
 </div>
 {{/each}}
