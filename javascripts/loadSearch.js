@@ -1,5 +1,5 @@
-define(["dependencies"], 
-  function(_$_) {
+define(["dependencies", "stars"], 
+  function(_$_, stars) {
 
      return {
 
@@ -19,6 +19,7 @@ define(["dependencies"],
 
               require(['hbs!../templates/each_movie'], function(getMovieTemplate){
                 $('#basic').html(getMovieTemplate(moviesArray));
+                $(".rating").rating();
               });
             });
         }
