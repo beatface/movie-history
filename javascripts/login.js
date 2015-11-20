@@ -107,6 +107,7 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
             console.log("what's going on", auth);
             
           }
+
         }); //END LOGOUT FUNCTION
 
     }); //END LOGIN FUNCTION
@@ -114,3 +115,4 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
 
 
 });// END REQUIRE FUCTION
+

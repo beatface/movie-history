@@ -19,8 +19,7 @@ function(_$_, login, Q, logout, grabMovies) {
 console.log("grabmovies", grabMovies);
 
 
-// Page turning functionality here, communicates with tags, classes and ids in index.html
-
+// Page turning functionality, communicates with tags, classes and ids in index.html
 
 
 //Instructions to add a page:
