@@ -10,6 +10,7 @@ return {
       $.ajax({ //grabs omdb api with title value
         url: "http://www.omdbapi.com/?t=" + title
       }).done(function(movieData) {
+        console.log("moviedata", movieData);
         ref.push({ //pushes picked moviedata from omdapi into firebase
           "title": movieData.Title,
           "year": movieData.Year,
@@ -22,5 +23,6 @@ return {
       });
     }
   };
+
 
 });

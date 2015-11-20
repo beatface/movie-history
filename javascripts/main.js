@@ -14,8 +14,8 @@ require.config({
 });
 
 require(
-["dependencies", "login", "q", "logout", "grabmovies"], 
-function(_$_, login, Q, logout, grabMovies) {
+["dependencies", "login", "q", "logout", "grabmovies", "loadSearch"], 
+function(_$_, login, Q, logout, grabMovies, loadSearch) {
 console.log("grabmovies", grabMovies);
 
 
@@ -27,15 +27,22 @@ console.log("grabmovies", grabMovies);
   // in button that will submit info/turn page, add class="page-turn" and attribute next="<next page here>". Make sure class of 'next' page matches identically the text within next="" attribute.
 
 //when search button on modal is clicked, then findMovie function happens
+
 $("#modal-search-btn").on("click", function(){
   console.log("hellooo");
-  grabMovies.findMovie();
+  loadSearch.populateMovies();
 
   require(['hbs!../templates/each_movie'], function(getMovieTemplate){
-    $('#basic').html(getMovieTemplate());
+    $('#results').html(getMovieTemplate());
   });
+});
 
+$("#search-my-movie-library").on("click", function() {
+  console.log("should load my movie library");
 
+  require(['hbs!../templates/each_my_movies'], function(getMyMoviesTemplate) {
+    $("#results").html(getMyMoviesTemplate());
+  });
 });
 
 
