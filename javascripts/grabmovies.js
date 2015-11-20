@@ -3,13 +3,14 @@ define(["dependencies", "authcall", "return-users", "createuser", "q"],
 
 return {
     findMovie: function() {
-      var ref = new Firebase("https://ama-moviehistory.firebaseio.com/");
+      var ref = new Firebase("https://ama-moviehistory.firebaseio.com/MovieLibrary");
+      //grabs title value from modal
       var title = $("#titleInput").val();
       console.log(title);
-      $.ajax({
+      $.ajax({ //grabs omdb api with title value
         url: "http://www.omdbapi.com/?t=" + title
       }).done(function(movieData) {
-        ref.push({
+        ref.push({ //pushes picked moviedata from omdapi into firebase
           "title": movieData.Title,
           "year": movieData.Year,
           "actors": movieData.Actors,
@@ -17,7 +18,7 @@ return {
           "imdb": movieData.imdbID,
           "poster": "http://img.omdbapi.com/?i=" + movieData.imdbID + "&apikey=8513e0a1"
         });
-        $("#titleInput").val("");
+        $("#titleInput").val(""); //leaves input empty
       });
     }
   };

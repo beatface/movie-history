@@ -36,9 +36,16 @@ $(".page").hide();
   // add page to index.html within <section class="page"> </section>
   // in button that will submit info/turn page, add class="page-turn" and attribute next="<next page here>". Make sure class of 'next' page matches identically the text within next="" attribute.
 
+//when search button on modal is clicked, then findMovie function happens
 $("#modal-search-btn").on("click", function(){
   console.log("hellooo");
   grabMovies.findMovie();
+
+  require(['hbs!../templates/each_movie'], function(getMovieTemplate){
+    $('#basic').html(getMovieTemplate());
+  });
+
+
 });
 
 
