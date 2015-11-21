@@ -72,7 +72,6 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
           var usersFirebase = myFirebaseRef.child("users");
           var userExists = false;
 
-          console.log("this is yr auth where you need it", auth.uid);
           $("#modal-search-btn").on("click", function(){
             loadSearch.populateMovies(authData.uid);
           });

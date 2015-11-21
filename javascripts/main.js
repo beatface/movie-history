@@ -18,7 +18,6 @@ require.config({
 require(
 ["dependencies", "login", "q", "logout", "grabmovies", "loadSearch", "stars"], 
 function(_$_, login, Q, logout, grabMovies, loadSearch, stars) {
-console.log("grabmovies", grabMovies);
 
 
 // Page turning functionality, communicates with tags, classes and ids in index.html

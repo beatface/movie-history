@@ -7,12 +7,12 @@ return {
       //grabs title value from modal
       console.log("moviedata", moviedata);
       console.log("chosenmovieposter", chosenmovieposter);
-      userMovieInLibrary = {moviedata};
+      userMovieInLibrary = {moviedata: moviedata};
       userMovieInLibrary.watched = false; //boolean
       userMovieInLibrary.rating = 0; // when user changes, stores 1 - 5 rating
 
       console.log("userMovieInLibrary", userMovieInLibrary);
-      ref.push({ userMovieInLibrary});
+      ref.push({ userMovieInLibrary: userMovieInLibrary});
       // Need to work on structure of object next!
         
     }

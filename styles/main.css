@@ -27,7 +27,7 @@ Login/Sign up: splash page styling
     color: #FFFFFF;
     text-transform: uppercase;
     letter-spacing: 4px;
-    text-shadow: 2px 2px #73000B;
+    text-shadow: 3px 4px #73000B;
     text-align: center;
     margin-bottom: 50px; }
   #splash-login input {
@@ -89,8 +89,7 @@ Filter Styling
 Movie poster styling
 */
 .poster {
-  position: relative;
-  border: 1px solid red; }
+  position: relative; }
 
 img {
   width: 100%; }
