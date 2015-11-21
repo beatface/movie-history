@@ -69,13 +69,16 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
             $("#entry-screen").hide();
           }
 
+          var thisUserAuth = authData.uid;
           var usersFirebase = myFirebaseRef.child("users");
+          var allUsersLibrariesFirebase = myFirebaseRef.child("all-users-libraries");
           var userExists = false;
 
           $("#modal-search-btn").on("click", function(){
             loadSearch.populateMovies(authData.uid);
           });
 
+          // Checks to see if user exists
           usersFirebase.once("value", function(dataSnap){
             dataSnap.forEach(function(childSnap) {
               if (childSnap.val().uid === authData.uid) {
@@ -83,13 +86,21 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
               }
             });
 
+
+            // If doesn't exist, creates user, and creates user library
             if (userExists === false) {
-              usersFirebase.push({
-                "uid": authData.uid,
-                "email": email,
-                "password": password
+              var thisUserFirebase = usersFirebase.child("user_" + thisUserAuth);
+              thisUserFirebase.set({
+                  "email": email,
+                  "password": password
+                }
+              );
+              // Creates this user's unique library, to which each movie is added.
+              var thisUserLibraryFirebase = allUsersLibrariesFirebase.child("user_library_" + thisUserAuth);
+              thisUserLibraryFirebase.set({
+                  "uid": thisUserAuth
               });
-            }
+            } // closes add new user, their library
 
 
           });
