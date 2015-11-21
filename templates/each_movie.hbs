@@ -1,11 +1,13 @@
-<div class="col-xs-4" key="{{@key}}">
+{{#each posterListings}}
+<div class="col-xs-4">
 	<div class="poster">
-		<img src="{{poster}}">
+		<img src="{{Poster}}" width="100%" height="300px">
 		<span class="glyphicon glyphicon-trash"></span>
 	</div>
-	<button class="movie-add">Add</button>
+	<button id="{{@key}}" class="movie-add">Add</button>
 	<button class="movie-watch">Watch</button>
 	<div class="stars">
 		<input class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false" data-show-caption="false" data-size="xs">
 	</div>
 </div>
+{{/each}}

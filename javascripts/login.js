@@ -81,27 +81,30 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
           // Checks to see if user exists
           usersFirebase.once("value", function(dataSnap){
             dataSnap.forEach(function(childSnap) {
-              if (childSnap.val().uid === authData.uid) {
+              if (childSnap.val().email) { // Checks to see if there's an email already logged, if so, user exists.
                 userExists = true;
               }
-            });
 
+              // If doesn't exist, creates user, and creates user library
+              if (userExists === false) {
+                console.log("userExists", userExists);
+                // Creates this new user's unique library, to which each movie is added.
+                var thisUserLibraryFirebase = allUsersLibrariesFirebase.child("user_library_" + thisUserAuth);
+                thisUserLibraryFirebase.set({
+                    "uid": thisUserAuth
+                }); // closes add new library
 
-            // If doesn't exist, creates user, and creates user library
-            if (userExists === false) {
-              var thisUserFirebase = usersFirebase.child("user_" + thisUserAuth);
-              thisUserFirebase.set({
+                var thisUserFirebase = usersFirebase.child("user_" + thisUserAuth);
+                thisUserFirebase.set({
                   "email": email,
                   "password": password
-                }
-              );
-              // Creates this user's unique library, to which each movie is added.
-              var thisUserLibraryFirebase = allUsersLibrariesFirebase.child("user_library_" + thisUserAuth);
-              thisUserLibraryFirebase.set({
-                  "uid": thisUserAuth
-              });
-            } // closes add new user, their library
 
+                });
+                
+
+              } // closes add new user
+
+            });
 
           });
           return returnusers.retrieveUsers();
