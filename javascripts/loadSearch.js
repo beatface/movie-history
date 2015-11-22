@@ -1,16 +1,18 @@
 define(["dependencies", "stars", "grabmovies"], 
   function(_$_, stars, grabmovies) {
+    var allResults = {};
 
      return {
 
         populateMovies: function(authInfo) { 
-
+          
           var title = $("#titleInput").val();
           $.ajax({ //grabs omdb api with title value
               url: "http://www.omdbapi.com/?s=" + title
             }).done(function(movieData) {
 
-              var allResults = movieData.Search; // Creates ann array of all search results
+              allResults = movieData.Search; // Creates ann array of all search results
+              console.log("movieData", movieData);
               var postersForTemplate = {}; // Prepares object to send to hbs template
 
               // Cycles thru and changes poster so we have permission to print to page
@@ -30,7 +32,7 @@ define(["dependencies", "stars", "grabmovies"],
               $(document).on("click", ".movie-add", function(e) {
                 var thisMovieId = e.target.id; // grabs movie in search results from id on add button
                 var thisMovieImdbId = allResults[thisMovieId].imdbID; // grabs proper movie information given correct id
-
+                console.log("allResults", allResults);
                 $.ajax({ // Makes the next api request to get full listing on movie, not just search results (which were abbreviated)
                   url: "http://www.omdbapi.com/?i=" + thisMovieImdbId + "&r=json"
                 }).done(function(fullMovieListing) {
