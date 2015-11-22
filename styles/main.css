@@ -8,7 +8,10 @@ body {
 .poster .glyphicon {
   position: absolute;
   top: 20px;
-  left: 40px; }
+  right: 20px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 25%; }
 
 input[type=radio] {
   display: none;
