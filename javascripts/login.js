@@ -1,5 +1,5 @@
-define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSearch", "user-library", "delete-movie"], 
-  function(_$_, authCall, returnusers, createuser, Q, loadSearch, usersLibrary, deleteMovie) {
+define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSearch", "user-library", "delete-movie", "movie-change"], 
+  function(_$_, authCall, returnusers, createuser, Q, loadSearch, usersLibrary, deleteMovie, movieChange) {
     $(".page").hide();
     $("#entry-screen").show();
     
@@ -152,6 +152,15 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
     });
   });
 
+$(document).on("click", ".movie-watch", function(e){
+    console.log("You clicked the watch button");
+    var watchKey = e.target.getAttribute('key');
+    console.log("IS THIS THE MOVIEKEY?", watchKey);
+    movieChange(watchKey, auth.uid)
+    .then(function(){
+      usersLibrary.getLibrary(auth.uid);
+    });
+  });
 
 });// END REQUIRE FUCTION
 
