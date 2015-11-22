@@ -152,11 +152,20 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
     });
   });
 
-$(document).on("click", ".movie-watch", function(e){
+  $(document).on("click", ".movie-watch", function(e){
     console.log("You clicked the watch button");
-    var watchKey = e.target.getAttribute('key');
-    console.log("IS THIS THE MOVIEKEY?", watchKey);
-    movieChange(watchKey, auth.uid)
+    var movieKey = e.target.getAttribute('key');
+    movieChange.watchMovie(movieKey, auth.uid)
+    .then(function(){
+      usersLibrary.getLibrary(auth.uid);
+    });
+  });
+
+  $(document).on('rating.change', function(event, starValue) {
+    console.log(starValue);
+    var starKey = event.target.id;
+    console.log("starKey", starKey);
+    movieChange.rateMovie(starKey, auth.uid, starValue)
     .then(function(){
       usersLibrary.getLibrary(auth.uid);
     });
