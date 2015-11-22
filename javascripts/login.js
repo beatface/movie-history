@@ -132,7 +132,10 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
 
     }); //END LOGIN FUNCTION
 
-
+  $(document).on("click", ".movie-add", function(e){
+    console.log("You clicked the add button");
+    loadSearch.clickToAdd(e);
+  });
 
 });// END REQUIRE FUCTION
 
