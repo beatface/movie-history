@@ -9,7 +9,9 @@
 <div class="col-xs-4" key="{{@key}}">
 	<div class="poster">
 		<img src="{{omdb_data.Poster}}">
-		<span class="glyphicon glyphicon-trash"></span>
+		<a href="#" class="delete-button">
+			<span key="{{@key}}" class="glyphicon glyphicon-trash"></span>
+		</a>
 	</div>
 	<button class="movie-watch" watched="{{watched}}">Watch</button>
 	<div class="stars" watched="{{watched}}">
