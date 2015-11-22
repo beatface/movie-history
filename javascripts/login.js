@@ -130,6 +130,7 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
 
         }); //END LOGOUT FUNCTION
 
+        // SEARCH USER LIBRARY
       $("#search-my-movie-library").on("click", function() {
         console.log("should load my movie library");
         usersLibrary.getLibrary(auth.uid);
