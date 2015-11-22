@@ -42,7 +42,7 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
 
             $(".main-page").show();
             $("#entry-screen").hide();
-
+            $('#password').val("");
           });
 
           return returnusers.retrieveUsers();
@@ -67,6 +67,7 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
             
             $(".main-page").show();
             $("#entry-screen").hide();
+            $('#password').val("");
           }
 
           var thisUserAuth = authData.uid;
@@ -117,10 +118,13 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
         //Start logout function
         $("#logout-button").click(function(e) {
           console.log("You have clicked the logout button!", auth);
-          if (auth) {
+          if (auth.uid) {
             auth = null;
             myFirebaseRef.unauth();
             console.log("what's going on", auth);
+
+            $(".page").hide();
+            $("#entry-screen").show();
             
           }
 
