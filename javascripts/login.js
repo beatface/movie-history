@@ -1,5 +1,5 @@
-define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSearch"], 
-  function(_$_, authCall, returnusers, createuser, Q, loadSearch) {
+define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSearch", "user-library"], 
+  function(_$_, authCall, returnusers, createuser, Q, loadSearch, usersLibrary) {
     $(".page").hide();
     $("#entry-screen").show();
     
@@ -130,12 +130,18 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
 
         }); //END LOGOUT FUNCTION
 
+      $("#search-my-movie-library").on("click", function() {
+        console.log("should load my movie library");
+        usersLibrary.getLibrary(auth.uid);
+      }); // SEARCH USER LIBRARY
+
     }); //END LOGIN FUNCTION
 
   $(document).on("click", ".movie-add", function(e){
     console.log("You clicked the add button");
     loadSearch.clickToAdd(e);
   });
+
 
 });// END REQUIRE FUCTION
 

@@ -30,14 +30,6 @@ function(_$_, login, Q, logout, grabMovies, loadSearch, stars) {
 //when search button on modal is clicked, then findMovie function happens
 
 
-$("#search-my-movie-library").on("click", function() {
-  console.log("should load my movie library");
-
-  require(['hbs!../templates/each_my_movies'], function(getMyMoviesTemplate) {
-    $("#results").html(getMyMoviesTemplate());
-  });
-});
-
 
 
 });

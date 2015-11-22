@@ -5,15 +5,15 @@
 </div>
 
 {{!-- TESTING GROUND --}}
-{{#each MyMovieLibrary}}
+{{#each this}}
 <div class="col-xs-4" key="{{@key}}">
 	<div class="poster">
-		<img src="{{poster}}">
+		<img src="{{omdb_data.Poster}}">
 		<span class="glyphicon glyphicon-trash"></span>
 	</div>
 	<button class="movie-watch">Watch</button>
 	<div class="stars">
-		<input id="{{this}}" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false" data-show-caption="false" data-size="xs">
+		<input id="{{@key}}" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false" data-show-caption="false" data-size="xs">
 	</div>
 </div>
 {{/each}}
