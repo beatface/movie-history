@@ -25,10 +25,13 @@ body {
    border-radius: 25%;
 }
 
-//This is to try and get my radio buttons only to display glyphs
-input[type=radio] {
+//This is to try and hide any buttons for movies already watched
+button[watched="true"] {
   display: none;
-  /* visibility: hidden; */
+}
+
+div[watched="false"] {
+  display: none;
 }
 
 /*

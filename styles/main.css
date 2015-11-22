@@ -13,9 +13,11 @@ body {
   background-color: rgba(0, 0, 0, 0.75);
   border-radius: 25%; }
 
-input[type=radio] {
-  display: none;
-  /* visibility: hidden; */ }
+button[watched="true"] {
+  display: none; }
+
+div[watched="false"] {
+  display: none; }
 
 /*
 Login/Sign up: splash page styling
