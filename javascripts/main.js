@@ -29,7 +29,4 @@ function(_$_, login, Q, logout, grabMovies, loadSearch, stars) {
 
 //when search button on modal is clicked, then findMovie function happens
 
-
-
-
 });

@@ -130,46 +130,96 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
 
         }); //END LOGOUT FUNCTION
 
+    });
         // SEARCH USER LIBRARY
-      $("#search-my-movie-library").on("click", function() {
-        console.log("should load my movie library");
+      // $("#search-my-movie-library").on("click", function() {
+      //   console.log("should load my movie library");
+      //   usersLibrary.getLibrary(auth.uid);
+      // }); // SEARCH USER LIBRARY
+
+     //END LOGIN FUNCTION
+      //---------
+
+   $("#search-my-movie-library").on("click", function(){
+    var myTitleInput = $("#myTitleInput").val();
+    console.log("titleinput", myTitleInput);
+    console.log("authuid", auth.uid);
+    // console.log("authtitle", auth.title); //doesn't work
+    
+    $.ajax({
+        url: "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_" + auth.uid + "/.json"
+        }).done(function(allmovies) {
+          console.log("allmovies", allmovies);
+
+          for (var movie in allmovies) {
+            console.log("movie", allmovies[movie].omdb_data.Title);
+            console.log("titleInput", titleInput);
+            if (allmovies[movie].omdb_data.Title === titleInput) {
+              console.log("selected movie", movie);
+            }
+          }
+
+          var allmoviesarray = [];
+          // for (var key in allmovies) {
+          // allmoviesarray[allmoviesarray.length] = allmovies[key];
+          // } console.log("array", allmoviesarray);
+          // console.log("allmoviesarray0", allmoviesarray[0]);
+
+        
+
+          // allmoviesarray.push(allmovies);
+          // console.log("allmoviesarray", allmoviesarray);
+          
+          // for (var i = 0; i < allmoviesarray.length; i++) {
+          //   if (allmoviesarray[i] === titleInput) {
+          //     console.log("allmoviesarray[i]", allmoviesarray[i]);
+          //   }
+          // }
+
+    });
+
+
+
+    // if (usersLibrary.getLibrary(auth.title) === titleInput) {
+    //   console.log("usersLibrary--matching title", usersLibrary.getLibrary(auth.title)); 
+    // }
+  });
+
+    //-----------
+
+
+    $(document).on("click", ".movie-add", function(e){
+      console.log("You clicked the add button");
+      loadSearch.clickToAdd(e);
+    });
+
+    $(document).on("click", ".delete-button", function(e){
+      console.log("You clicked the delete button");
+      var movieKey = e.target.getAttribute('key');
+      deleteMovie(movieKey, auth.uid)
+      .then(function(){
         usersLibrary.getLibrary(auth.uid);
-      }); // SEARCH USER LIBRARY
-
-    }); //END LOGIN FUNCTION
-
-  $(document).on("click", ".movie-add", function(e){
-    console.log("You clicked the add button");
-    loadSearch.clickToAdd(e);
-  });
-
-  $(document).on("click", ".delete-button", function(e){
-    console.log("You clicked the delete button");
-    var movieKey = e.target.getAttribute('key');
-    deleteMovie(movieKey, auth.uid)
-    .then(function(){
-      usersLibrary.getLibrary(auth.uid);
+      });
     });
-  });
 
-  $(document).on("click", ".movie-watch", function(e){
-    console.log("You clicked the watch button");
-    var movieKey = e.target.getAttribute('key');
-    movieChange.watchMovie(movieKey, auth.uid)
-    .then(function(){
-      usersLibrary.getLibrary(auth.uid);
+    $(document).on("click", ".movie-watch", function(e){
+      console.log("You clicked the watch button");
+      var movieKey = e.target.getAttribute('key');
+      movieChange.watchMovie(movieKey, auth.uid)
+      .then(function(){
+        usersLibrary.getLibrary(auth.uid);
+      });
     });
-  });
 
-  $(document).on('rating.change', function(event, starValue) {
-    console.log(starValue);
-    var starKey = event.target.id;
-    console.log("starKey", starKey);
-    movieChange.rateMovie(starKey, auth.uid, starValue)
-    .then(function(){
-      usersLibrary.getLibrary(auth.uid);
+    $(document).on('rating.change', function(event, starValue) {
+      console.log(starValue);
+      var starKey = event.target.id;
+      console.log("starKey", starKey);
+      movieChange.rateMovie(starKey, auth.uid, starValue)
+      .then(function(){
+        usersLibrary.getLibrary(auth.uid);
+      });
     });
-  });
 
 });// END REQUIRE FUCTION
 

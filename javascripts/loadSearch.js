@@ -40,6 +40,7 @@ define(["dependencies", "stars", "grabmovies"],
     function clickToAdd(e) {
       var thisMovieId = e.target.id; // grabs movie in search results from id on add button
       var thisMovieImdbId = allResults[thisMovieId].imdbID; // grabs proper movie information given correct id
+      console.log("allresults.imdbid", allResults.imdbID);
       console.log("thisMovieId after add", thisMovieId);
       console.log("thisMovieImdbId after add", thisMovieImdbId);
       // console.log("allResults after clicking add", allResults);

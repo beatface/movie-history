@@ -7,6 +7,7 @@ return {
       //grabs title value from modal
       var userMovieInLibrary = thisUserLibrary.child(moviedata.Title + "_" + moviedata.Year);
       userMovieInLibrary.set({
+        "title": moviedata.Title,
         "omdb_data": moviedata,
         "watched": false, // boolean
         "rating": 0 // user will rate 1 to 5
