@@ -130,13 +130,46 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
 
         }); //END LOGOUT FUNCTION
 
-        // SEARCH USER LIBRARY
-      $("#search-my-movie-library").on("click", function() {
-        console.log("should load my movie library");
-        usersLibrary.getLibrary(auth.uid);
-      }); // SEARCH USER LIBRARY
-
     }); //END LOGIN FUNCTION
+
+ $("#search-my-movie-library").on("click", function(){
+    var myTitleInput = $("#myTitleInput").val();
+    console.log("titleinput", myTitleInput);
+    console.log("authuid", auth.uid);
+    // console.log("authtitle", auth.title); //doesn't work
+    
+    $.ajax({
+        url: "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_" + auth.uid + "/.json"
+        }).done(function(allmovies) {
+          console.log("allmovies", allmovies);
+        if (myTitleInput === ""){
+          console.log("inside if");
+          usersLibrary.getLibrary(auth.uid);
+        } else {
+          console.log("inside else");
+          require(['hbs!../templates/each_my_movies'], 
+            function(getMyMoviesTemplate) {
+            console.log("titleInput", myTitleInput);
+            for (var movie in allmovies) {
+              if (allmovies[movie].Title === myTitleInput) {
+                console.log("selected movie", movie);
+                console.log("allmovie[movie]", allmovies[movie]);
+                    $("#results").html(getMyMoviesTemplate({"thing":allmovies[movie]}));
+              }
+            }
+          }); // :)Closes the AREquire function
+          
+        } //closes else
+    }); // closes .done statement
+
+
+
+    // if (usersLibrary.getLibrary(auth.title) === titleInput) {
+    //   console.log("usersLibrary--matching title", usersLibrary.getLibrary(auth.title)); 
+    // }
+  }); // closes click function
+
+    //-----------
 
   $(document).on("click", ".movie-add", function(e){
     console.log("You clicked the add button");
