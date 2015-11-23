@@ -124,6 +124,7 @@ define(["dependencies", "authcall", "return-users", "createuser", "q", "loadSear
             console.log("what's going on", auth);
 
             $(".page").hide();
+            $("#results").html("");
             $("#entry-screen").show();
             
           }
