@@ -20,16 +20,27 @@ require(
 function(_$_, login, Q, logout, grabMovies, loadSearch, stars) {
 
 
-// Page turning functionality, communicates with tags, classes and ids in index.html
+  $(document).on("click", ".clickety", function(e){
+    console.log("You clicked the | button inbetween");
+    $("div[watchtoggle='true']").show();
+    $("div[watchtoggle='false']").show();
+  });
 
+  $(document).on("click", ".clickWatch", function(e){
+    console.log("You clicked the WATCHED button at top");
+    $("div[watchtoggle='true']").show();
+    $("div[watchtoggle='false']").hide();
+  });
 
-//Instructions to add a page:
-  // add page to index.html within <section class="page"> </section>
-  // in button that will submit info/turn page, add class="page-turn" and attribute next="<next page here>". Make sure class of 'next' page matches identically the text within next="" attribute.
+  $(document).on("click", ".clickUnwatch", function(e){
+    console.log("You clicked the UNWATCHED button at top");
+    $("div[watchtoggle='true']").hide();
+    $("div[watchtoggle='false']").show();
+  });
 
-//when search button on modal is clicked, then findMovie function happens
-
-
+  $("#search-my-movie-library").on("click", function(){
+    $("#watch-unwatch").removeClass('test');
+  });
 
 
 });
