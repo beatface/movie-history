@@ -112,9 +112,8 @@ Movie poster styling
   border-radius: 25%;
   font-size: 1.5em; }
 
-input[type=radio] {
-  display: none;
-  /* visibility: hidden; */ }
+.test {
+  visibility: hidden; }
 
 button[watched="true"] {
   display: none; }

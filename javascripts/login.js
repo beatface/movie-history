@@ -28,9 +28,7 @@ function findOrCreateNewUser (myFirebaseRef, thisUserAuth, userEmail, userPasswo
           "password": userPassword
         });
         
-      } // closes add new user
-
-    
+      } // closes add new user    
 
   }); // closes process of checking if user is unique
 
