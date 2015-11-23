@@ -1,5 +1,5 @@
-define(["dependencies", "authcall", "return-users", "createuser", "q"], 
-  function(_$_, authCall, returnusers, createuser, Q) {
+define(["dependencies", "authcall", "return-users", "create-user-in-private-firebase", "q"], 
+  function(_$_, authCall, returnusers, createUserInPrivateFirebase, Q) {
 
 return {
     findMovie: function(moviedata, userID) {

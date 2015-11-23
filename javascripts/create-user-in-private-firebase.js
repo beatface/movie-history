@@ -12,7 +12,6 @@ define(["dependencies", "q"], function(_$_, Q) {
 			    console.log("Error creating user:", error);
 			    deferred.reject(error);
 			  } else {
-			    console.log("Successfully created user account with uid:", userData.uid);
 			    deferred.resolve(userData);
 			  }
 			});
