@@ -12,7 +12,6 @@ define(["dependencies", "stars", "grabmovies"],
         }).done(function(movieData) {
 
           allResults = movieData.Search; // Creates ann array of all search results
-          console.log("movieData", movieData);
           var postersForTemplate = {}; // Prepares object to send to hbs template
           console.log("postersForTemplate", postersForTemplate);
 
@@ -22,8 +21,6 @@ define(["dependencies", "stars", "grabmovies"],
           }
 
           postersForTemplate = {"posterListings": allResults}; 
-          console.log("allResults before clicking add", allResults);
-          console.log("postersForTemplate after allResults", postersForTemplate);
 
           // Sends array, modified with proper poster w/ api key, to template
           require(['hbs!../templates/each_movie'], function(getMovieTemplate){
@@ -42,7 +39,6 @@ define(["dependencies", "stars", "grabmovies"],
       var thisMovieImdbId = allResults[thisMovieId].imdbID; // grabs proper movie information given correct id
       console.log("thisMovieId after add", thisMovieId);
       console.log("thisMovieImdbId after add", thisMovieImdbId);
-      // console.log("allResults after clicking add", allResults);
       $.ajax({ // Makes the next api request to get full listing on movie, not just search results (which were abbreviated)
         url: "http://www.omdbapi.com/?i=" + thisMovieImdbId + "&r=json"
       }).done(function(fullMovieListing) {
