@@ -2,28 +2,24 @@ define(["dependencies", "q"], function(_$_, Q) {
 
 	var appUsers;
 
-	return {
+	function retrieveUsers () {
+		var deferred = Q.defer();
 
-		/*jshint esnext: true */
+		$.ajax({
+            url: "https://ama-moviehistory.firebaseio.com/users.json",
+            method: "GET"
+        })
+        .done(function(users) {
 
-		retrieveUsers: function() {
-			var deferred = Q.defer();
+        	deferred.resolve(users);
+        })
+        .fail(function(error) {
+        	deferred.reject(error);
+        	console.log("FAIL", error);
+        });
+        return deferred.promise;
+    }
 
-			$.ajax({
-	            url: "https://ama-moviehistory.firebaseio.com/users.json",
-	            method: "GET"
-	            // data: JSON.stringify(newUser)
-	        })
-	        .done(function(users) {
+    return retrieveUsers;
 
-	        	deferred.resolve(users);
-	        })
-	        .fail(function(error) {
-	        	deferred.reject(error);
-	        	console.log("FAIL", error);
-	        });
-	        return deferred.promise;
-	    }
-
-	};
 });
