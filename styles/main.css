@@ -2,24 +2,6 @@ body {
   background-color: #1F1F1F;
   font-size: .9em; }
 
-.poster {
-  position: relative; }
-
-.poster .glyphicon {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.75);
-  border-radius: 25%;
-  font-size: 1.5em; }
-
-button[watched="true"] {
-  display: none; }
-
-div[watched="false"] {
-  display: none; }
-
 /*
 Login/Sign up: splash page styling
 */
@@ -79,6 +61,10 @@ Navigation Styling
 #logout-button {
   margin-right: 15px; }
 
+.modal-body input {
+  width: 100%;
+  font-size: 1.6em; }
+
 /*
 Filter Styling
 */
@@ -91,22 +77,49 @@ Filter Styling
   color: #FFFFFF;
   letter-spacing: 2px; }
 
+.btn:focus, .btn:hover, .btn-default:focus, .btn-default:hover {
+  color: #FFFFFF; }
+
+.btn-default:focus, .btn-default:hover {
+  color: #FFFFFF;
+  background-color: #73000B; }
+
 /*
 Movie poster styling
 */
+.poster-display-unit {
+  margin-top: 20px;
+  height: 350px; }
+  .poster-display-unit .poster {
+    margin-bottom: 10px;
+    position: relative; }
+
+.poster-display-unit :not(:first-child) {
+  float: right;
+  opacity: .9;
+  font-size: .9em;
+  text-transform: uppercase; }
+
 .poster {
   position: relative; }
 
-img {
-  width: 100%; }
-
 .poster .glyphicon {
   position: absolute;
-  top: 5px;
-  right: 5px; }
+  top: 20px;
+  right: 20px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 25%;
+  font-size: 1.5em; }
 
 input[type=radio] {
   display: none;
   /* visibility: hidden; */ }
+
+button[watched="true"] {
+  display: none; }
+
+div[watched="false"] {
+  display: none; }
 
 /*# sourceMappingURL=main.css.map */

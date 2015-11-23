@@ -11,30 +11,6 @@ body {
 	font-size: .9em;
 }
 
-//This is to put the trash glyphicon over the image of the poster (hopefully)
-.poster {
-   position: relative;
-}
-
-.poster .glyphicon {
-   position: absolute;
-   top: 20px;
-   right: 20px;
-   color: white;
-   background-color: rgba(0,0,0,0.75);
-   border-radius: 25%;
-   font-size: 1.5em;
-}
-
-//This is to try and hide any buttons for movies already watched
-button[watched="true"] {
-  display: none;
-}
-
-div[watched="false"] {
-  display: none;
-}
-
 /*
 Login/Sign up: splash page styling
 */
@@ -116,7 +92,11 @@ Navigation Styling
 
 #logout-button {
 	margin-right: 15px;
-	// background-color: $primarycolor;
+}
+
+.modal-body input {
+	width: 100%;
+	font-size: 1.6em;
 }
 
 
@@ -134,25 +114,63 @@ Filter Styling
 	letter-spacing: 2px;
 }
 
+.btn:focus, .btn:hover, .btn-default:focus, .btn-default:hover {
+	color: $primarycolor_light;
+}
+
+.btn-default:focus, .btn-default:hover {
+	color: $primarycolor_light;
+	background-color: $primarycolor_accentdark;
+}
+
 /*
 Movie poster styling
 */
 
-.poster {
-  position: relative;
+.poster-display-unit {
+	margin-top: 20px;
+	height: 350px;
+	// width: 212px;
+
+	.poster {
+		margin-bottom: 10px;
+		position: relative;
+	}
+
+}
+.poster-display-unit :not(:first-child) {
+	float: right;
+	opacity: .9;
+	font-size: .9em;
+	text-transform: uppercase;
 }
 
-img {
-  width: 100%;
+//This is to put the trash glyphicon over the image of the poster (hopefully)
+.poster {
+   position: relative;
 }
 
 .poster .glyphicon {
-  position: absolute;
-  top: 5px;
-  right: 5px; }
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   color: white;
+   background-color: rgba(0,0,0,0.75);
+   border-radius: 25%;
+   font-size: 1.5em;
+}
 
 input[type=radio] {
   display: none;
   /* visibility: hidden; */
+}
+
+//This is to try and hide any buttons for movies already watched { Noice! - Andri }
+button[watched="true"] {
+  display: none;
+}
+
+div[watched="false"] {
+  display: none;
 }
 
