@@ -115,6 +115,9 @@ Movie poster styling
 .test {
   visibility: hidden; }
 
+.sizemodal {
+  font-size: 1.8em; }
+
 button[watched="true"] {
   display: none; }
 

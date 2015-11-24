@@ -1,5 +1,5 @@
-define(["dependencies", "authcall", "return-users", "create-user-in-private-firebase", "q", "loadSearch", "user-library", "delete-movie", "movie-change", "user-sign-up", "login", "searchmymovies"], 
-  function(_$_, authCall, returnusers, createUserInPrivateFirebase, Q, loadSearch, usersLibrary, deleteMovie, movieChange, userSignUp, loginUniqueUser, searchMyMovies) {
+define(["dependencies", "authcall", "return-users", "create-user-in-private-firebase", "q", "loadSearch", "user-library", "delete-movie", "movie-change", "user-sign-up", "login", "searchmymovies", "add-modal"], 
+  function(_$_, authCall, returnusers, createUserInPrivateFirebase, Q, loadSearch, usersLibrary, deleteMovie, movieChange, userSignUp, loginUniqueUser, searchMyMovies, addModal) {
     
     $(".page").hide(); // on page load, everything is hidden
 
@@ -74,11 +74,16 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
         });
     }); //END LOGIN FUNCTION
 
-
-
-
+// when you click on a poster, addModal file gets called and modal appears with movie info.
+    $('body').on('click', '.poster', function(event) {
+      var movieKey = event.target.getAttribute('key'); 
+      console.log("daakey", movieKey);
+      console.log("auth", auth);
+      addModal(auth, movieKey); 
+    });
 
     //////// BELOW HERE, FUNCTIONALITY WILL CHANGE ///////
+ 
 
   $("#modal-search-btn").on("click", function(){
     loadSearch.populateMovies(auth);
