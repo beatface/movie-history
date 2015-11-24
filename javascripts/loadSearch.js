@@ -1,12 +1,12 @@
-define(["dependencies", "stars", "grabmovies"], 
-  function(_$_, stars, grabmovies) {
+define(["dependencies", "stars", "grabmovies", "q"], 
+  function(_$_, stars, grabmovies, Q) {
     var allResults = {};
     var authInfo;
 
 
     function populateMovies(passedAuth, userSearchInput) { 
 
-      var deferred = Q.defer;
+      var deferred = Q.defer();
 
       console.log("populateMovies triggered");
       authInfo = passedAuth;
@@ -16,7 +16,6 @@ define(["dependencies", "stars", "grabmovies"],
 
           allResults = movieData.Search; // Creates ann array of all search results
           var postersForTemplate = {}; // Prepares object to send to hbs template
-          console.log("postersForTemplate", postersForTemplate);
 
           // Cycles thru and changes poster so we have permission to print to page
           for (var i = 0; i < allResults.length; i++) {
@@ -24,16 +23,16 @@ define(["dependencies", "stars", "grabmovies"],
           }
 
           postersForTemplate = {"posterListings": allResults}; 
+          console.log("postersForTemplate", postersForTemplate);
 
-          // Sends array, modified with proper poster w/ api key, to template
-          require(['hbs!../templates/each_movie'], function(getMovieTemplate){
-            $('#results').html(getMovieTemplate(postersForTemplate));
-            $(".rating").rating();
-          });
-          deferred.resolve()
-
-
+          deferred.resolve(postersForTemplate); // where promise delivers resolve, send posters object
+        })
+        .fail(function(error) {
+          console.log("error", error);
+          defer.reject(error);
         });
+
+        return deferred.promise;
     }
 
         // Adds data from just this particular movie to user's library of movies, not yet functioning

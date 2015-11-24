@@ -1,5 +1,5 @@
-define(["dependencies", "authcall", "return-users", "create-user-in-private-firebase", "q", "loadSearch", "user-library", "delete-movie", "movie-change", "user-sign-up", "login", "searchmymovies", "add-modal", "hbs!../templates/each_my_movies"], 
-  function(_$_, authCall, returnusers, createUserInPrivateFirebase, Q, loadSearch, usersLibrary, deleteMovie, movieChange, userSignUp, loginUniqueUser, searchMyMovies, addModal, eachMyMoviesTemplate) {
+define(["dependencies", "authcall", "return-users", "create-user-in-private-firebase", "q", "loadSearch", "user-library", "delete-movie", "movie-change", "user-sign-up", "login", "searchmymovies", "add-modal", "hbs!../templates/each_my_movies", "hbs!../templates/each_movie"], 
+  function(_$_, authCall, returnusers, createUserInPrivateFirebase, Q, loadSearch, usersLibrary, deleteMovie, movieChange, userSignUp, loginUniqueUser, searchMyMovies, addModal, eachMyMoviesTemplate, eachMovieTemplate) {
     
     $(".page").hide(); // on page load, everything is hidden
 
@@ -125,15 +125,15 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
             usersLibrary(auth) // collects promise from user-library.js
               .then(function(userUniqueLibrary) {
                 userSearchResults = searchMyMovies(userSearchValue, userUniqueLibrary);
+                loadMoviesToPage(userSearchResults); // just slaps handlebars on user's search results
                 console.log("userSearchResults", userSearchResults);
                 return loadSearch.populateMovies(auth, userSearchValue);
               })
-              .then(function() {
-
+              .then(function(omdbSearchResults) {
+                console.log("omdbSearchResults", omdbSearchResults);
+                $("#results").append(eachMovieTemplate(omdbSearchResults));
+                $(".rating").rating();
                 // test against user's library so we don't populate if already in thing...
-                // loadSearch.populateMovies(auth, userSearchValue);
-                // leave off point
-                loadMoviesToPage(userSearchResults);
               })
               .fail(function(error) {
                 console.log("error", error);
@@ -144,72 +144,72 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
       } // closes if user hits enter
     }); // closes keyup
 
+    ////// BELOW HERE, FUNCTIONALITY WILL CHANGE ///////
+ 
+  $("#search-my-movie-library").on("click", function(){
+    searchMyMovies(auth); // potentially need userlibrary and title collected on click
+
+  }); // closes click function of search my movies
+
+  $(document).on("click", ".movie-add", function(e){
+    console.log("You clicked the add button");
+    loadSearch.clickToAdd(e);
+  });
+
+  $(document).on("click", ".delete-button", function(e){
+    console.log("You clicked the delete button");
+    var movieKey = e.target.getAttribute('key');
+    deleteMovie(movieKey, auth)
+    .then(function(){
+      usersLibrary(auth);
+    });
+  });
+
+  $(document).on("click", ".movie-watch", function(e){
+    console.log("You clicked the watch button");
+    var movieKey = e.target.getAttribute('key');
+    movieChange.watchMovie(movieKey, auth)
+    .then(function(){
+      usersLibrary(auth);
+    });
+  });
+
+  $(document).on('rating.change', function(event, starValue) {
+    console.log(starValue);
+    var starKey = event.target.id;
+    console.log("starKey", starKey);
+    movieChange.rateMovie(starKey, auth, starValue)
+    .then(function(){
+      usersLibrary(auth);
+    });
+  });
+
+
+  $(document).on("click", ".clickAll", function(e){
+    console.log("You clicked the All button at top");
+    $("div[watchtoggle='true']").show();
+    $("div[watchtoggle='false']").show();
+  });
+
+  $(document).on("click", ".clickWatch", function(e){
+    console.log("You clicked the WATCHED button at top");
+    $("div[watchtoggle='true']").show();
+    $("div[watchtoggle='false']").hide();
+  });
+
+  $(document).on("click", ".clickUnwatch", function(e){
+    console.log("You clicked the UNWATCHED button at top");
+    $("div[watchtoggle='true']").hide();
+    $("div[watchtoggle='false']").show();
+  });
+
+  $(document).on("click", ".clickFave", function(e){
+    console.log("You clicked the Fave button at top");
+    $("div[watchtoggle='true']").hide();
+    $("div[watchtoggle='false']").hide();
+    $("div[fave='5']").show();
+  });
 
 });// Close page
 
-    //////// BELOW HERE, FUNCTIONALITY WILL CHANGE ///////
- 
-//   $("#search-my-movie-library").on("click", function(){
-//     searchMyMovies(auth); // potentially need userlibrary and title collected on click
-
-//   }); // closes click function of search my movies
-
-//   $(document).on("click", ".movie-add", function(e){
-//     console.log("You clicked the add button");
-//     loadSearch.clickToAdd(e);
-//   });
-
-//   $(document).on("click", ".delete-button", function(e){
-//     console.log("You clicked the delete button");
-//     var movieKey = e.target.getAttribute('key');
-//     deleteMovie(movieKey, auth)
-//     .then(function(){
-//       usersLibrary(auth);
-//     });
-//   });
-
-//   $(document).on("click", ".movie-watch", function(e){
-//     console.log("You clicked the watch button");
-//     var movieKey = e.target.getAttribute('key');
-//     movieChange.watchMovie(movieKey, auth)
-//     .then(function(){
-//       usersLibrary(auth);
-//     });
-//   });
-
-//   $(document).on('rating.change', function(event, starValue) {
-//     console.log(starValue);
-//     var starKey = event.target.id;
-//     console.log("starKey", starKey);
-//     movieChange.rateMovie(starKey, auth, starValue)
-//     .then(function(){
-//       usersLibrary(auth);
-//     });
-//   });
-
-
-//   $(document).on("click", ".clickAll", function(e){
-//     console.log("You clicked the All button at top");
-//     $("div[watchtoggle='true']").show();
-//     $("div[watchtoggle='false']").show();
-//   });
-
-//   $(document).on("click", ".clickWatch", function(e){
-//     console.log("You clicked the WATCHED button at top");
-//     $("div[watchtoggle='true']").show();
-//     $("div[watchtoggle='false']").hide();
-//   });
-
-//   $(document).on("click", ".clickUnwatch", function(e){
-//     console.log("You clicked the UNWATCHED button at top");
-//     $("div[watchtoggle='true']").hide();
-//     $("div[watchtoggle='false']").show();
-//   });
-
-//   $(document).on("click", ".clickFave", function(e){
-//     console.log("You clicked the Fave button at top");
-//     $("div[watchtoggle='true']").hide();
-//     $("div[watchtoggle='false']").hide();
-//     $("div[fave='5']").show();
-//   });
 
