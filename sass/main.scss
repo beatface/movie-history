@@ -129,14 +129,16 @@ Movie poster styling
 
 .poster-display-unit {
 	margin-top: 20px;
-	height: 350px;
+	height: 300px;
 	// width: 212px;
 
 	.poster {
 		margin-bottom: 10px;
 		position: relative;
 	}
-
+	img {
+		width: 100%;
+	}
 }
 .poster-display-unit :not(:first-child) {
 	float: right;
@@ -152,8 +154,8 @@ Movie poster styling
 
 .poster .glyphicon {
    position: absolute;
-   top: 20px;
-   right: 20px;
+   top: 10px;
+   right: 10px;
    color: white;
    background-color: rgba(0,0,0,0.75);
    border-radius: 25%;
