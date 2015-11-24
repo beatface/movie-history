@@ -11,43 +11,6 @@
 </head>
 
 <body>
-<!-- Find Movies Modal -->
-    <div class="modal fade" id="searchMovies" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Search for a movie in our database...</h4>
-                </div>
-                <div class="modal-body">
-                	<input type='text' id='titleInput' placeholder='What title are you looking for?'>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="modal-search-btn">Search</button>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- End Find Movies Modal -->
-
-<!-- Search My Movies Modal -->
-    <div class="modal fade" id="searchMyMovies" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Search your movies...</h4>
-                </div>
-                <div class="modal-body">
-                	<input type='text' id='myTitleInput' placeholder='Enter title, or click Search to see all your movies...'>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="search-my-movie-library">Search</button>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- End Search My Movies Modal -->
 
 <!-- Begin Splash Page -->
 
@@ -87,16 +50,12 @@
 		    <div class="navbar-header">
 		      <a class="navbar-brand" href="#">Movie History</a>
 		    </div>
-	<!-- 	<div class="nav navbar-nav navbar-left search">
-			    <input id="search-box" type="text" class="search-box" placeholder="Search Movies">
-		    </div> -->
-		      <ul class="nav navbar-nav navbar-left">
-		        <li><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#searchMovies">Find Movies</button></li>
-		        <li><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#searchMyMovies">Search My Movies</button></li>
-		      </ul>
-		      <div id="logout-location" class="nav navbar-nav navbar-right">
-		        <button id="logout-button" class="btn navbar-btn">Log Out</button>
-		      </div>
+		        <div class="navbar-form navbar-left form-group">
+		        	<input type="text" class="form-control search-all-movies" placeholder="Search for a movie...">
+		        </div>
+	    	<div id="logout-location" class="nav navbar-nav navbar-right">
+	    		<button id="logout-button" class="btn navbar-btn">Log Out</button>
+	    	</div>
 		  </div><!-- /.container-fluid -->
 		</nav>
 

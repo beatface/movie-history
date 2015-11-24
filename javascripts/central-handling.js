@@ -19,7 +19,6 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
       $(".main-page").show();
       $("#entry-screen").hide();
       $('#password').val("");
-      console.log("you've changed pages");
     }
 
 
@@ -63,6 +62,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
       authCall(email, password, myFirebaseRef) 
         // Send email and password for login authentication
         .then(function(authData) {
+          console.log("successful login", authData);
           auth = authData.uid;
 
           changePageOnAuth(); // keep thus far
