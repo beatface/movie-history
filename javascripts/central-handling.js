@@ -66,8 +66,8 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
           auth = authData.uid;
 
           changePageOnAuth(); // keep thus far
-
           loginUniqueUser(myFirebaseRef, auth, email, password); // checks user against existing ones
+          searchMyMovies(auth); // Loads user's library on login
         })
         .fail(function(error) {
           console.log("error", error);
@@ -146,10 +146,6 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     $("div[watchtoggle='true']").hide();
     $("div[watchtoggle='false']").hide();
     $("div[fave='5']").show();
-  });
-
-  $("#search-my-movie-library").on("click", function(){
-    $("#watch-unwatch").removeClass('test');
   });
 });// END REQUIRE FUCTION
 
