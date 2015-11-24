@@ -75,9 +75,12 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
 
     // when you click on a poster, addModal file gets called and modal appears with movie info.
     $('body').on('click', '.poster', function(event) {
+      loadSearch.addSearchModal(event);
+    });
+
+    $('body').on('click', '.myposter', function(event) {
       var movieKey = event.target.getAttribute('key'); 
       addModal(auth, movieKey);
-      loadSearch.addSearchModal(event);
     });
 
     // Search bar functionality
