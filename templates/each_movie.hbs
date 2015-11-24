@@ -1,7 +1,8 @@
 {{#each posterListings}}
 <div class="col-xs-3 poster-display-unit">
 	<div class="poster">
-		<img src="{{Poster}}" height="300px">
+		<img src="{{Poster}}" onError="this.onerror=null;this.src='';" height="300px">
+		<h1 class="behind">{{Title}}<h1>
 		<span class="glyphicon glyphicon-trash"></span>
 	</div>
 	<button id="{{@key}}" class="movie-add btn btn-default">Add</button>
