@@ -4,11 +4,11 @@ define(["dependencies", "stars", "grabmovies"],
     var authInfo;
 
 
-    function populateMovies(passedAuth) { 
+    function populateMovies(passedAuth, userSearchInput) { 
+      console.log("populateMovies triggered");
       authInfo = passedAuth;
-      var title = $("#titleInput").val();
-      $.ajax({ //grabs omdb api with title value
-          url: "http://www.omdbapi.com/?s=" + title
+      $.ajax({ //grabs omdb api with userSearchInput value
+          url: "http://www.omdbapi.com/?s=" + userSearchInput
         }).done(function(movieData) {
 
           allResults = movieData.Search; // Creates ann array of all search results
@@ -28,7 +28,6 @@ define(["dependencies", "stars", "grabmovies"],
             $(".rating").rating();
           });
 
-          $("#titleInput").val(""); //leaves input empty
 
         });
     }
@@ -51,8 +50,28 @@ define(["dependencies", "stars", "grabmovies"],
       });
     }
 
+    function addSearchModal(e) {
+      console.log("e", e);
+      var thisMovieId = e.target.id;
+      console.log("thismovieid", thisMovieId);
+      var thisMovieImdbId = allResults[thisMovieId].imdbID; // grabs proper movie information given correct id
+      console.log("thisMovieId after add", thisMovieId);
+      console.log("thisMovieImdbId after add", thisMovieImdbId);
+      $.ajax({ // Makes the next api request to get full listing on movie, not just search results (which were abbreviated)
+        url: "http://www.omdbapi.com/?i=" + thisMovieImdbId + "&r=json"
+      }).done(function(fullMovieListing) {
+        console.log("fullMovieListing", fullMovieListing);
+          require(['hbs!../templates/modal'], function(modalTemplate) {
+          console.log("modalTemplate", modalTemplate);
+            $("#modal-body").html(modalTemplate(fullMovieListing));
+          });
+        $('#posterModal').modal();
+       });
+    }
+
     return {
       clickToAdd: clickToAdd,
       populateMovies: populateMovies,
+      addSearchModal: addSearchModal
     };
 });
