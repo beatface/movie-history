@@ -1,7 +1,7 @@
 {{#each this}}
-<div class="col-xs-3 poster-display-unit" key="{{@key}}" watchtoggle="{{watched}}" fave="{{rating}}">
+<div class="col-sm-3 col-xs-12 poster-display-unit" key="{{@key}}" watchtoggle="{{watched}}" fave="{{rating}}">
 	<div class="poster" id="{{@key}}">
-		<img key="{{@key}}" src="{{Poster}}" onError="this.onerror=null;this.src='';" height="300px">
+		<img key="{{@key}}" src="{{Poster}}" onError="this.onerror=null;this.src='';">
 		<h1 class="behind">{{Title}}<h1>
 		<a href="#" class="delete-button">
 			<span key="{{@key}}" class="glyphicon glyphicon-trash"></span>

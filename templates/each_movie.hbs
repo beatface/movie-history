@@ -1,7 +1,7 @@
 {{#each posterListings}}
-<div class="col-xs-3 poster-display-unit">
+<div class="col-sm-3 col-xs-12 poster-display-unit">
 	<div class="poster">
-		<img id="{{@key}}" key="{{@key}}" src="{{Poster}}" onError="this.onerror=null;this.src='';" height="300px">
+		<img id="{{@key}}" key="{{@key}}" src="{{Poster}}" onError="this.onerror=null;this.src='';">
 		<h1 class="behind">{{Title}}<h1>
 		<span class="glyphicon glyphicon-trash"></span>
 	</div>

@@ -128,8 +128,6 @@ Movie poster styling
 
 .poster-display-unit {
 	margin-bottom: 50px;
-	height: 300px;
-	// width: 212px;
 
 	.poster {
 		margin-bottom: 10px;
@@ -148,6 +146,24 @@ Movie poster styling
 //Filter buttons in particular
 #filters {
 	margin-bottom: 25px;
+	button:not(:first-child) {
+		border-left: 3px solid white;
+	}
+}
+
+@media screen and (max-width: 590px) {
+	#filters button {
+		display: block;
+		width: 100%;
+	}
+
+	#filters button:not(:first-child) {
+		border: none;
+	}
+
+	.poster-display-unit {
+		clear: both;
+	}
 }
 
 //This is to put the trash glyphicon over the image of the poster (hopefully)
