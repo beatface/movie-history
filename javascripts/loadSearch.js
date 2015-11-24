@@ -61,11 +61,11 @@ define(["dependencies", "stars", "grabmovies"],
         url: "http://www.omdbapi.com/?i=" + thisMovieImdbId + "&r=json"
       }).done(function(fullMovieListing) {
         console.log("fullMovieListing", fullMovieListing);
-        $('#posterModal').modal();
           require(['hbs!../templates/modal'], function(modalTemplate) {
           console.log("modalTemplate", modalTemplate);
             $("#modal-body").html(modalTemplate(fullMovieListing));
           });
+        $('#posterModal').modal();
        });
     }
 

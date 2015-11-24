@@ -21,3 +21,19 @@ Movie History is created by Amy Lee Bennett, Mathew Ostrander, and Andri Alexand
 
 *Please view [our Trello board](https://trello.com/b/APqiIaV4/movie-history) for development progress and good places to jump in.*
 
+Need to Install: 
+Jquery, Handlebars, Lodash, HandleBars, Q, Bootstrap, Firebase, Bootstrap, Stars (bootstrap plugin)
+
+Javascript files:
+central-handling : Our central spot for all of our event handlers
+dependencies : Defines bootstrap, jquery, handlebars, firebase, q
+main : includes requre.config information
+login : Logs an existing user in
+user-sign-up : Authenticates a new user and pushes user email, password into firebase
+loadSearch : Populates movies from omda api and inserts into handlebar template each_movie.hbs on search movies in nav through PopulateMovies function.
+With clickToAdd function, movies populated through search are then stored into firebase when add button is clicked. Function addSearchModal has a modal appear when searched movies are clicked on. Modal includes title of movie, year, and actors. 
+grabMovies : 
+
+
+
+
