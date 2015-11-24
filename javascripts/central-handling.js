@@ -66,8 +66,8 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
           auth = authData.uid;
 
           changePageOnAuth(); // keep thus far
-
           loginUniqueUser(myFirebaseRef, auth, email, password); // checks user against existing ones
+          searchMyMovies(auth); // Loads user's library on login
         })
         .fail(function(error) {
           console.log("error", error);
@@ -127,5 +127,30 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     });
   });
 
+
+  $(document).on("click", ".clickAll", function(e){
+    console.log("You clicked the All button at top");
+    $("div[watchtoggle='true']").show();
+    $("div[watchtoggle='false']").show();
+  });
+
+  $(document).on("click", ".clickWatch", function(e){
+    console.log("You clicked the WATCHED button at top");
+    $("div[watchtoggle='true']").show();
+    $("div[watchtoggle='false']").hide();
+  });
+
+  $(document).on("click", ".clickUnwatch", function(e){
+    console.log("You clicked the UNWATCHED button at top");
+    $("div[watchtoggle='true']").hide();
+    $("div[watchtoggle='false']").show();
+  });
+
+  $(document).on("click", ".clickFave", function(e){
+    console.log("You clicked the Fave button at top");
+    $("div[watchtoggle='true']").hide();
+    $("div[watchtoggle='false']").hide();
+    $("div[fave='5']").show();
+  });
 });// END REQUIRE FUCTION
 
