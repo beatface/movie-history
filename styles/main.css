@@ -61,19 +61,8 @@ Navigation Styling
 #logout-button {
   margin-right: 15px; }
 
-.search-box {
-  position: relative;
-  top: 50%;
-  transform: translateY(40%);
-  width: 200px;
-  font-size: 1.6em; }
-
-.modal-body input {
-  width: 100%;
-  font-size: 1.6em; }
-
-.search-all-movies {
-  width: 300px; }
+.form-control.search-all-movies {
+  font-size: 1.1rem; }
 
 /*
 Filter Styling
