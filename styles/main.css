@@ -95,11 +95,10 @@ Filter Styling
 Movie poster styling
 */
 .poster-display-unit {
-  margin-top: 20px;
+  margin-bottom: 50px;
   height: 300px; }
   .poster-display-unit .poster {
-    margin-bottom: 10px;
-    position: relative; }
+    margin-bottom: 10px; }
   .poster-display-unit img {
     width: 100%; }
 
@@ -108,6 +107,9 @@ Movie poster styling
   opacity: .9;
   font-size: .9em;
   text-transform: uppercase; }
+
+#filters {
+  margin-bottom: 25px; }
 
 .poster {
   position: relative; }
