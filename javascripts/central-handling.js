@@ -79,16 +79,12 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
       var movieKey = event.target.getAttribute('key'); 
       console.log("daakey", movieKey);
       console.log("auth", auth);
-      addModal(auth, movieKey); 
+      addModal(auth, movieKey);
+      loadSearch.addSearchModal(event);
     });
 
     //////// BELOW HERE, FUNCTIONALITY WILL CHANGE ///////
  
-
-  $("#modal-search-btn").on("click", function(){
-    loadSearch.populateMovies(auth);
-  });
-
   $("#search-my-movie-library").on("click", function(){
     searchMyMovies(auth); // potentially need userlibrary and title collected on click
 
