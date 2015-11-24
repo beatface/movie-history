@@ -123,8 +123,8 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
   });
 
 
-  $(document).on("click", ".clickety", function(e){
-    console.log("You clicked the | button inbetween");
+  $(document).on("click", ".clickAll", function(e){
+    console.log("You clicked the All button at top");
     $("div[watchtoggle='true']").show();
     $("div[watchtoggle='false']").show();
   });
@@ -139,6 +139,13 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     console.log("You clicked the UNWATCHED button at top");
     $("div[watchtoggle='true']").hide();
     $("div[watchtoggle='false']").show();
+  });
+
+  $(document).on("click", ".clickFave", function(e){
+    console.log("You clicked the Fave button at top");
+    $("div[watchtoggle='true']").hide();
+    $("div[watchtoggle='false']").hide();
+    $("div[fave='5']").show();
   });
 
   $("#search-my-movie-library").on("click", function(){
