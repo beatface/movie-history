@@ -7,61 +7,31 @@ define(function(require) {
     var searchResults = {};
 
     for (var thisMovie in userMovieLibrary) {
-      console.log("thisMovie");
+      // console.log("thisMovie", userMovieLibrary[thisMovie]);
       var lowercaseMovie = userMovieLibrary[thisMovie].Title.toLowerCase();
-      if (lowercaseMovie.indexOf(lowercaseSearchValue) > 0) {
+      if (lowercaseMovie.indexOf(lowercaseSearchValue) > -1) {
         searchResults[thisMovie] = userMovieLibrary[thisMovie];
       }
     } // closes outer for loop
 
-    console.log("searchResults", searchResults);
+    return searchResults;
   } // closes processSearchResults
 
   function searchMyMovies(passedAuth, userSearchInput) {
-    console.log("searchMyMovies triggered");
+
+    // var userSearchResults;
     
-    usersLibrary(passedAuth) // collects promise from user-library.js
-      .then(function(userUniqueLibrary) {
-        processSearchResults(userSearchInput, userUniqueLibrary);
-      })
-      .fail(function(error) {
-        console.log("error", error);
-      });
+    // usersLibrary(passedAuth) // collects promise from user-library.js
+    //   .then(function(userUniqueLibrary) {
+    //     userSearchResults = searchMyMovies(userSearchInput, userUniqueLibrary);
+    //   })
+    //   .fail(function(error) {
+    //     console.log("error", error);
+    //   });
 
   } // closes searchMyMovies function
- // hmm page incomplete...
-  
 
-
-
-
-
-        // if (userSearchInput === ""){
-        //   usersLibrary.getLibrary(passedAuth);
-        // } else {
-        //   require(['hbs!../templates/each_my_movies'], 
-        //     function(getMyMoviesTemplate) {
-        //     for (var movie in allmovies) {
-        //       if (allmovies[movie].Title === userSearchInput) {
-        //         $("#results").html(getMyMoviesTemplate({"thing":allmovies[movie]}));
-        //       }
-        //     }
-        //   }); // :)Closes the AREquire function
-          
-        // } //closes else
-
-
-
-
-
-
-
-
-
-
-
-
-  return searchMyMovies;
+  return processSearchResults;
   
 
 });

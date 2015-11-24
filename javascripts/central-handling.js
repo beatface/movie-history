@@ -10,15 +10,23 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
 
     myFirebaseRef.child("users").on("value", function(snapshot) {
       // usersLibrary(auth);
+      // how to make this functioning???
     });
 
     var email, password;
     var signup = false;
 
+    // Enters second page when user authenticates
     function changePageOnAuth () {
       $(".main-page").show();
       $("#entry-screen").hide();
       $('#password').val("");
+    }
+
+    // Applies handlebar template and stars plugin
+    function loadMoviesToPage (library) {
+      $("#results").html(eachMyMoviesTemplate(library));
+      $(".rating").rating();
     }
 
 
@@ -69,8 +77,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
         })
         // Puts results to DOM, according to which user loads
         .then(function(allUserMovies) {
-          $("#results").html(eachMyMoviesTemplate(allUserMovies));
-          $(".rating").rating();
+          loadMoviesToPage(allUserMovies);
         })
         .fail(function(error) {
           console.log("error", error);
@@ -93,14 +100,14 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     userSearchField.keyup(function(e) {
       if (e.keyCode === 13) {
         var userSearchValue = userSearchField.val(); // gathers user input in search
+        var userSearchResults;
 
         // If search bar is empty, loads user's movie catalog
         if (userSearchValue === "") {
           console.log("should not have triggered serachMyMovies");
           usersLibrary(auth)
             .then(function(allUserMovies) {
-              $("#results").html(eachMyMoviesTemplate(allUserMovies));
-              $(".rating").rating();
+              loadMoviesToPage(allUserMovies);
             })
             .fail(function(error) {
               console.log("error", error);
@@ -112,15 +119,21 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
           userSearchField.val("");
           console.log("userInput", userSearchValue);
           // loadSearch.populateMovies(auth, userSearchValue);
-          searchMyMovies(auth, userSearchValue);
-        }
 
+            usersLibrary(auth) // collects promise from user-library.js
+              .then(function(userUniqueLibrary) {
+                userSearchResults = searchMyMovies(userSearchValue, userUniqueLibrary);
+                console.log("userSearchResults", userSearchResults);
+                loadMoviesToPage(userSearchResults);
+              })
+              .fail(function(error) {
+                console.log("error", error);
+              });
 
+        } // closes else
 
-
-
-      }
-    });
+      } // closes if user hits enter
+    }); // closes keyup
 
 
 });// Close page
