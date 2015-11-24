@@ -74,7 +74,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
         });
     }); //END LOGIN FUNCTION
 
-// when you click on a poster, addModal file gets called and modal appears with movie info.
+// when you click on your added movie poster, addModal file gets called and modal appears with movie info.
     $('body').on('click', '.poster', function(event) {
       var movieKey = event.target.getAttribute('key'); 
       console.log("daakey", movieKey);
