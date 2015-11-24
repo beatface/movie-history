@@ -16,8 +16,8 @@ require.config({
 });
 
 require(
-["dependencies", "central-handling", "q", "logout", "grabmovies", "loadSearch", "stars"], 
-function(_$_, centralHandling, Q, logout, grabMovies, loadSearch, stars) {
+["dependencies", "central-handling", "q", "grabmovies", "loadSearch", "stars"], 
+function(_$_, centralHandling, Q, grabMovies, loadSearch, stars) {
 
 
 
