@@ -4,10 +4,11 @@ define(["dependencies", "stars", "grabmovies"],
     var authInfo;
 
 
-    function populateMovies(passedAuth, title) { 
+    function populateMovies(passedAuth, userSearchInput) { 
+      console.log("populateMovies triggered");
       authInfo = passedAuth;
-      $.ajax({ //grabs omdb api with title value
-          url: "http://www.omdbapi.com/?s=" + title
+      $.ajax({ //grabs omdb api with userSearchInput value
+          url: "http://www.omdbapi.com/?s=" + userSearchInput
         }).done(function(movieData) {
 
           allResults = movieData.Search; // Creates ann array of all search results
@@ -27,7 +28,6 @@ define(["dependencies", "stars", "grabmovies"],
             $(".rating").rating();
           });
 
-          $("#titleInput").val(""); //leaves input empty
 
         });
     }
