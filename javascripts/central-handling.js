@@ -70,6 +70,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
         // Puts results to DOM, according to which user loads
         .then(function(allUserMovies) {
           $("#results").html(eachMyMoviesTemplate(allUserMovies));
+          $(".rating").rating();
         })
         .fail(function(error) {
           console.log("error", error);
@@ -99,6 +100,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
           usersLibrary(auth)
             .then(function(allUserMovies) {
               $("#results").html(eachMyMoviesTemplate(allUserMovies));
+              $(".rating").rating();
             })
             .fail(function(error) {
               console.log("error", error);
