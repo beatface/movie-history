@@ -4,9 +4,8 @@ define(["dependencies", "stars", "grabmovies"],
     var authInfo;
 
 
-    function populateMovies(passedAuth) { 
+    function populateMovies(passedAuth, title) { 
       authInfo = passedAuth;
-      var title = $("#titleInput").val();
       $.ajax({ //grabs omdb api with title value
           url: "http://www.omdbapi.com/?s=" + title
         }).done(function(movieData) {

@@ -62,7 +62,6 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
       authCall(email, password, myFirebaseRef) 
         // Send email and password for login authentication
         .then(function(authData) {
-          console.log("successful login", authData);
           auth = authData.uid;
 
           changePageOnAuth(); // keep thus far
@@ -74,12 +73,21 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
         });
     }); //END LOGIN FUNCTION
 
-// when you click on a poster, addModal file gets called and modal appears with movie info.
+    // when you click on a poster, addModal file gets called and modal appears with movie info.
     $('body').on('click', '.poster', function(event) {
       var movieKey = event.target.getAttribute('key'); 
-      console.log("daakey", movieKey);
-      console.log("auth", auth);
       addModal(auth, movieKey); 
+    });
+
+    // Search bar functionality
+    var userSearchField = $(".search-all-movies");
+    userSearchField.keyup(function(e) {
+      if (e.keyCode === 13) {
+        var userSearchValue = userSearchField.val();
+        userSearchField.val("");
+        console.log("userInput", userSearchValue);
+        loadSearch.populateMovies(auth, userSearchValue);
+      }
     });
 
     //////// BELOW HERE, FUNCTIONALITY WILL CHANGE ///////
