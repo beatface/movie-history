@@ -5,6 +5,9 @@ define(["dependencies", "stars", "grabmovies"],
 
 
     function populateMovies(passedAuth, userSearchInput) { 
+
+      var deferred = Q.defer;
+
       console.log("populateMovies triggered");
       authInfo = passedAuth;
       $.ajax({ //grabs omdb api with userSearchInput value
@@ -27,6 +30,7 @@ define(["dependencies", "stars", "grabmovies"],
             $('#results').html(getMovieTemplate(postersForTemplate));
             $(".rating").rating();
           });
+          deferred.resolve()
 
 
         });

@@ -29,8 +29,30 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
       $(".rating").rating();
     }
 
+    function beginWebApplication(thisUserAuth, email, password) {
+      usersLibrary(auth) // receives promise state from user-library.js
+      // Puts results to DOM, according to which user loads
+        .then(function(allUserMovies) {
+          loadMoviesToPage(allUserMovies);
+        })
+        .fail(function(error) {
+          console.log("error", error);
+        });
+    } // closes beginWebApplication function
+    
+    //Start logout function
+    $("#logout-button").click(function(e) {
+      console.log("You have clicked the logout button!", auth);
+      if (auth) {
+        auth = null;
+        myFirebaseRef.unauth();
+        $("#results").html("");
+        $(".page").hide(); // potentially change in future
+        $("#entry-screen").show();
+      }
+    }); //END LOGOUT FUNCTION
 
-
+    // Creates user and enters into application
     $('#signupButton').on("click", function() {
       email = $('#email').val();
       password = $('#password').val();
@@ -40,28 +62,14 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
           auth = authConfirmNumber.uid;
           console.log("authConfirm", auth);
           changePageOnAuth();
+          beginWebApplication(auth, email, password); // sends to main page functionality
         })
         .fail(function(error) {
           console.log(error);
         });
-
     });// Closes sign up button click
 
 
-    //Start logout function
-    $("#logout-button").click(function(e) {
-      console.log("You have clicked the logout button!", auth);
-      if (auth) {
-        auth = null;
-        myFirebaseRef.unauth();
-        console.log("what's going on", auth);
-
-        $("#results").html("");
-        $(".page").hide(); // potentially change in future
-        $("#entry-screen").show();
-      }
-
-    }); //END LOGOUT FUNCTION
 
     // User authentication, private process w/ Firebase
     $('#login').on("click", function() {
@@ -71,19 +79,14 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
         // Send email and password for login authentication
         .then(function(authData) {
           auth = authData.uid;
-          changePageOnAuth(); // keep thus far
+          changePageOnAuth();
           loginUniqueUser(myFirebaseRef, auth, email, password); // checks user against existing ones
-          return usersLibrary(auth);
-        })
-        // Puts results to DOM, according to which user loads
-        .then(function(allUserMovies) {
-          loadMoviesToPage(allUserMovies);
+          beginWebApplication(auth, email, password); // sends to main page functionality
         })
         .fail(function(error) {
           console.log("error", error);
         }); // closes authCall promise
-
-    }); //END LOGIN FUNCTION
+    }); // Closes Login click function
 
     // when you click on a poster, addModal file gets called and modal appears with movie info.
     $('body').on('click', '.poster', function(event) {
@@ -118,12 +121,18 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
         else {  
           userSearchField.val("");
           console.log("userInput", userSearchValue);
-          // loadSearch.populateMovies(auth, userSearchValue);
 
             usersLibrary(auth) // collects promise from user-library.js
               .then(function(userUniqueLibrary) {
                 userSearchResults = searchMyMovies(userSearchValue, userUniqueLibrary);
                 console.log("userSearchResults", userSearchResults);
+                return loadSearch.populateMovies(auth, userSearchValue);
+              })
+              .then(function() {
+
+                // test against user's library so we don't populate if already in thing...
+                // loadSearch.populateMovies(auth, userSearchValue);
+                // leave off point
                 loadMoviesToPage(userSearchResults);
               })
               .fail(function(error) {

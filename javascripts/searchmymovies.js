@@ -17,20 +17,6 @@ define(function(require) {
     return searchResults;
   } // closes processSearchResults
 
-  function searchMyMovies(passedAuth, userSearchInput) {
-
-    // var userSearchResults;
-    
-    // usersLibrary(passedAuth) // collects promise from user-library.js
-    //   .then(function(userUniqueLibrary) {
-    //     userSearchResults = searchMyMovies(userSearchInput, userUniqueLibrary);
-    //   })
-    //   .fail(function(error) {
-    //     console.log("error", error);
-    //   });
-
-  } // closes searchMyMovies function
-
   return processSearchResults;
   
 
