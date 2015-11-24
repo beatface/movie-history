@@ -20,27 +20,7 @@ require(
 function(_$_, centralHandling, Q, logout, grabMovies, loadSearch, stars) {
 
 
-  $(document).on("click", ".clickety", function(e){
-    console.log("You clicked the | button inbetween");
-    $("div[watchtoggle='true']").show();
-    $("div[watchtoggle='false']").show();
-  });
 
-  $(document).on("click", ".clickWatch", function(e){
-    console.log("You clicked the WATCHED button at top");
-    $("div[watchtoggle='true']").show();
-    $("div[watchtoggle='false']").hide();
-  });
-
-  $(document).on("click", ".clickUnwatch", function(e){
-    console.log("You clicked the UNWATCHED button at top");
-    $("div[watchtoggle='true']").hide();
-    $("div[watchtoggle='false']").show();
-  });
-
-  $("#search-my-movie-library").on("click", function(){
-    $("#watch-unwatch").removeClass('test');
-  });
 
 
 });

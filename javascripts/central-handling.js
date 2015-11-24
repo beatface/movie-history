@@ -122,5 +122,27 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     });
   });
 
+
+  $(document).on("click", ".clickety", function(e){
+    console.log("You clicked the | button inbetween");
+    $("div[watchtoggle='true']").show();
+    $("div[watchtoggle='false']").show();
+  });
+
+  $(document).on("click", ".clickWatch", function(e){
+    console.log("You clicked the WATCHED button at top");
+    $("div[watchtoggle='true']").show();
+    $("div[watchtoggle='false']").hide();
+  });
+
+  $(document).on("click", ".clickUnwatch", function(e){
+    console.log("You clicked the UNWATCHED button at top");
+    $("div[watchtoggle='true']").hide();
+    $("div[watchtoggle='false']").show();
+  });
+
+  $("#search-my-movie-library").on("click", function(){
+    $("#watch-unwatch").removeClass('test');
+  });
 });// END REQUIRE FUCTION
 
