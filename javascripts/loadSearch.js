@@ -36,6 +36,7 @@ define(["dependencies", "stars", "grabmovies"],
         // Adds data from just this particular movie to user's library of movies, not yet functioning
     function clickToAdd(e) {
       var thisMovieId = e.target.id; // grabs movie in search results from id on add button
+      console.log("e", e);
       var thisMovieImdbId = allResults[thisMovieId].imdbID; // grabs proper movie information given correct id
       console.log("thisMovieId after add", thisMovieId);
       console.log("thisMovieImdbId after add", thisMovieImdbId);
@@ -52,6 +53,6 @@ define(["dependencies", "stars", "grabmovies"],
 
     return {
       clickToAdd: clickToAdd,
-      populateMovies: populateMovies
+      populateMovies: populateMovies,
     };
 });

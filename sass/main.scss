@@ -177,6 +177,12 @@ Movie poster styling
 	visibility: hidden;
 }
 
+// Modal Styling
+
+.sizemodal {
+	font-size: 1.8em;
+}
+
 //This is to try and hide any buttons for movies already watched { Noice! - Andri }
 button[watched="true"] {
   display: none;
