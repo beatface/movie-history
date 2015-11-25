@@ -9,6 +9,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     var myFirebaseRef = new Firebase("https://ama-moviehistory.firebaseio.com/");
     var email, password;
     var signup = false;
+    var userSearchValue;
 
     // Enters second page when user authenticates
     function changePageOnAuth () {
@@ -23,6 +24,25 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
       $(".rating").rating();
     }
 
+    function searchUsSomeResults(searchForThis) {
+      usersLibrary(auth) // collects promise from user-library.js
+      .then(function(userUniqueLibrary) {
+        userSearchResults = searchMyMovies(searchForThis, userUniqueLibrary);
+        loadMoviesToPage(userSearchResults); // just slaps handlebars on user's search results
+        console.log("userSearchResults", userSearchResults);
+        return loadSearch.populateMovies(auth, searchForThis);
+      })
+      .then(function(omdbSearchResults) {
+        console.log("omdbSearchResults", omdbSearchResults);
+        $("#results").append(eachMovieTemplate(omdbSearchResults));
+        $(".rating").rating();
+        // test against user's library so we don't populate if already in thing...
+      })
+      .fail(function(error) {
+        console.log("error", error);
+      });
+    } // END SEARCH OMDB FUNCTION
+
     function beginWebApplication(thisUserAuth, email, password) {
       usersLibrary(auth) // receives promise state from user-library.js
       // Puts results to DOM, according to which user loads
@@ -35,6 +55,8 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
             var movie = snapshot.val();
 
             loadMoviesToPage(movie);
+            console.log("userSearchValue", userSearchValue);
+            searchUsSomeResults(userSearchValue);
 
             console.log("movie", movie);
           }); //End on Value Function
@@ -108,7 +130,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     var userSearchField = $(".search-all-movies");
     userSearchField.keyup(function(e) {
       if (e.keyCode === 13) {
-        var userSearchValue = userSearchField.val(); // gathers user input in search
+        userSearchValue = userSearchField.val(); // gathers user input in search
         var userSearchResults;
 
         // If search bar is empty, loads user's movie catalog
@@ -127,24 +149,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
         else {  
           userSearchField.val("");
           console.log("userInput", userSearchValue);
-
-            usersLibrary(auth) // collects promise from user-library.js
-              .then(function(userUniqueLibrary) {
-                userSearchResults = searchMyMovies(userSearchValue, userUniqueLibrary);
-                loadMoviesToPage(userSearchResults); // just slaps handlebars on user's search results
-                console.log("userSearchResults", userSearchResults);
-                return loadSearch.populateMovies(auth, userSearchValue);
-              })
-              .then(function(omdbSearchResults) {
-                console.log("omdbSearchResults", omdbSearchResults);
-                $("#results").append(eachMovieTemplate(omdbSearchResults));
-                $(".rating").rating();
-                // test against user's library so we don't populate if already in thing...
-              })
-              .fail(function(error) {
-                console.log("error", error);
-              });
-
+          searchUsSomeResults(userSearchValue);
         } // closes else
 
       } // closes if user hits enter
