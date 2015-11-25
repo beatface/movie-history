@@ -7,12 +7,6 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
 
     var auth;
     var myFirebaseRef = new Firebase("https://ama-moviehistory.firebaseio.com/");
-
-    myFirebaseRef.child("users").on("value", function(snapshot) {
-      // usersLibrary(auth);
-      // how to make this functioning???
-    });
-
     var email, password;
     var signup = false;
 
@@ -32,9 +26,21 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     function beginWebApplication(thisUserAuth, email, password) {
       usersLibrary(auth) // receives promise state from user-library.js
       // Puts results to DOM, according to which user loads
+
         .then(function(allUserMovies) {
-          loadMoviesToPage(allUserMovies);
-        })
+          var fireurl = "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_" + thisUserAuth +"/";
+          console.log("fireurl", fireurl);
+          var firebaseConnection = new Firebase(fireurl);
+          firebaseConnection.on("value", function(snapshot) {
+            var movie = snapshot.val();
+
+            loadMoviesToPage(movie);
+
+            console.log("movie", movie);
+          }); //End on Value Function
+
+          // loadMoviesToPage(allUserMovies);
+        }) // End then
         .fail(function(error) {
           console.log("error", error);
         });
@@ -161,7 +167,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     var movieKey = e.target.getAttribute('key');
     deleteMovie(movieKey, auth)
     .then(function(){
-      usersLibrary(auth);
+      // usersLibrary(auth);
     });
   });
 
@@ -170,7 +176,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     var movieKey = e.target.getAttribute('key');
     movieChange.watchMovie(movieKey, auth)
     .then(function(){
-      usersLibrary(auth);
+      // usersLibrary(auth);
     });
   });
 
@@ -180,7 +186,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     console.log("starKey", starKey);
     movieChange.rateMovie(starKey, auth, starValue)
     .then(function(){
-      usersLibrary(auth);
+      // usersLibrary(auth);
     });
   });
 
