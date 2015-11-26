@@ -136,6 +136,7 @@ Movie poster styling
 	}
 }
 .poster-controls {
+	min-height: 35px;
 	opacity: .9;
 	font-size: .9em;
 	text-transform: uppercase;
@@ -184,7 +185,7 @@ Movie poster styling
 	position: absolute;
     color: white;
     top: 20px;
-    left: 10px;
+    left: 20px;
     z-index: -1;
 }
 
