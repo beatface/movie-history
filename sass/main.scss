@@ -128,7 +128,6 @@ Movie poster styling
 
 .poster-display-unit {
 	margin-bottom: 50px;
-
 	.poster {
 		margin-bottom: 10px;
 	}
@@ -136,8 +135,7 @@ Movie poster styling
 		width: 100%;
 	}
 }
-.poster-display-unit :not(:first-child) {
-	float: right;
+.poster-controls {
 	opacity: .9;
 	font-size: .9em;
 	text-transform: uppercase;
@@ -179,6 +177,7 @@ Movie poster styling
    background-color: rgba(0,0,0,0.75);
    border-radius: 25%;
    font-size: 1.25em;
+    z-index: 1;
 }
 
 .behind {
@@ -191,6 +190,10 @@ Movie poster styling
 
 .test {
 	visibility: hidden;
+}
+
+.myposter, .poster {
+   min-height: 250px;
 }
 
 // Modal Styling
