@@ -130,6 +130,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     var userSearchField = $(".search-all-movies");
     userSearchField.keyup(function(e) {
       if (e.keyCode === 13) {
+        $("#all-user-title").hide();
         userSearchValue = userSearchField.val(); // gathers user input in search
         var userSearchResults;
 
@@ -139,6 +140,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
           usersLibrary(auth)
             .then(function(allUserMovies) {
               loadMoviesToPage(allUserMovies);
+              $("#all-user-title").show();
             })
             .fail(function(error) {
               console.log("error", error);
@@ -198,20 +200,28 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
 
   $(document).on("click", ".clickAll", function(e){
     console.log("You clicked the All button at top");
-    $("div[watchtoggle='true']").show();
-    $("div[watchtoggle='false']").show();
+    userSearchValue = "";
+    usersLibrary(auth)
+    .then(function(allUserMovies) {
+      loadMoviesToPage(allUserMovies);
+      $("#all-user-title").show();
+    });
   });
 
   $(document).on("click", ".clickWatch", function(e){
     console.log("You clicked the WATCHED button at top");
     $("div[watchtoggle='true']").show();
     $("div[watchtoggle='false']").hide();
+    $("#all-user-title").hide();
+    $(".search-result").hide();
   });
 
   $(document).on("click", ".clickUnwatch", function(e){
     console.log("You clicked the UNWATCHED button at top");
     $("div[watchtoggle='true']").hide();
     $("div[watchtoggle='false']").show();
+    $("#all-user-title").hide();
+    $(".search-result").hide();
   });
 
   $(document).on("click", ".clickFave", function(e){
@@ -219,6 +229,8 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     $("div[watchtoggle='true']").hide();
     $("div[watchtoggle='false']").hide();
     $("div[fave='5']").show();
+    $("#all-user-title").hide();
+    $(".search-result").hide();
   });
 
 });// Close page

@@ -170,21 +170,22 @@ Movie poster styling
 
 .behind {
 	position: absolute;
-    color: white;
+    color: $primarycolor_light;
     top: 20px;
     right: 20px;
     z-index: -1;
 }
 
-.test {
-	visibility: hidden;
+#all-user-title {
+	margin-top: 0px;
+	color: $primarycolor_light;
 }
 
 .myposter, .poster {
    min-height: 250px;
    h3 {
    	position: absolute;
-    color: white;
+    color: $primarycolor_light;
     top: 25px;
     right: 20px;
    }
@@ -211,6 +212,10 @@ div[watched="false"] {
 
 //Buttons originally broke at 590px
 @media screen and (max-width: 767px) {
+	.all-title-container {
+		text-align: center;
+	}
+
 	#filters {
 		button {
 			display: block;
@@ -236,7 +241,7 @@ div[watched="false"] {
    min-height: 250px;
    h3 {
    	position: absolute;
-    color: white;
+    color: $primarycolor_light;
     top: 25px;
     right: 20px;
    }
