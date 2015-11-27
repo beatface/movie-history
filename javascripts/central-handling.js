@@ -137,14 +137,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
         // If search bar is empty, loads user's movie catalog
         if (userSearchValue === "") {
           console.log("should not have triggered serachMyMovies");
-          usersLibrary(auth)
-            .then(function(allUserMovies) {
-              loadMoviesToPage(allUserMovies);
-              $("#all-user-title").show();
-            })
-            .fail(function(error) {
-              console.log("error", error);
-            });
+          alert("Please type in a movie title to search!");
         } 
 
         // If user entered value into search bar
