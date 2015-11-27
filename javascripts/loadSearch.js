@@ -68,6 +68,7 @@ define(["dependencies", "stars", "grabmovies", "q"],
           console.log("modalTemplate", modalTemplate);
             $("#modal-body").html(modalTemplate(fullMovieListing));
           });
+        $(".modal-title").html(fullMovieListing.Title);
         $('#posterModal').modal();
        });
     }
