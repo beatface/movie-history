@@ -8,7 +8,7 @@ define(["dependencies", "stars", "grabmovies", "q"],
 
       var deferred = Q.defer();
 
-      console.log("populateMovies triggered");
+      console.log("populateMovies triggered", userSearchInput);
       authInfo = passedAuth;
       $.ajax({ //grabs omdb api with userSearchInput value
           url: "http://www.omdbapi.com/?s=" + userSearchInput

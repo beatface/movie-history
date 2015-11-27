@@ -131,9 +131,6 @@ Movie poster styling
 	.poster {
 		margin-bottom: 10px;
 	}
-	img {
-		width: 100%;
-	}
 }
 .poster-controls {
 	min-height: 35px;
@@ -185,7 +182,7 @@ Movie poster styling
 	position: absolute;
     color: white;
     top: 20px;
-    left: 20px;
+    right: 20px;
     z-index: -1;
 }
 
@@ -195,6 +192,16 @@ Movie poster styling
 
 .myposter, .poster {
    min-height: 250px;
+   h3 {
+   	position: absolute;
+    color: white;
+    top: 20px;
+    right: 20px;
+   }
+
+   img {
+   	max-height: 250px;
+   }
 }
 
 // Modal Styling
