@@ -42,6 +42,7 @@ define(function(require) {
       usersLibrary(auth) // collects promise from user-library.js
       .then(function(userUniqueLibrary) {
         userSearchResults = searchMyMovies(searchForThis, userUniqueLibrary);
+        console.log("userSearchResults1", userSearchResults);
         loadMoviesToPage(userSearchResults); // just slaps handlebars on user's search results
         console.log("userSearchResults", userSearchResults);
         return loadSearch.populateMovies(auth, searchForThis);
