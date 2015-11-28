@@ -1,5 +1,19 @@
-define(["dependencies", "authcall", "return-users", "create-user-in-private-firebase", "q", "loadSearch", "user-library", "delete-movie", "movie-change", "user-sign-up", "login", "searchmymovies", "add-modal", "hbs!../templates/each_my_movies", "hbs!../templates/each_movie"], 
-  function(_$_, authCall, returnusers, createUserInPrivateFirebase, Q, loadSearch, usersLibrary, deleteMovie, movieChange, userSignUp, loginUniqueUser, searchMyMovies, addModal, eachMyMoviesTemplate, eachMovieTemplate) {
+define(function(require) { 
+  var _$_ = require("dependencies");
+  var authCall = require("authcall");
+  var returnusers = require("return-users");
+  var createUserInPrivateFirebase = require("create-user-in-private-firebase");
+  var Q = require("q");
+  var loadSearch = require("loadSearch");
+  var usersLibrary = require("user-library");
+  var deleteMovie = require("delete-movie");
+  var movieChange = require("movie-change");
+  var userSignUp = require("user-sign-up");
+  var loginUniqueUser = require("login");
+  var searchMyMovies = require("searchmymovies");
+  var addModal = require("add-modal");
+  var eachMyMoviesTemplate = require("hbs!../templates/each_my_movies");
+  var eachMovieTemplate = require("hbs!../templates/each_movie");
     
     $(".page").hide(); // on page load, everything is hidden
 
