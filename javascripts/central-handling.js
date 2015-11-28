@@ -62,15 +62,15 @@ define(function(require) {
           for (var j = 0; j < userSearchArray.length; i++) {
             console.log("omdbresults", omdbSearchResults.posterListings[i].imdbID);
             console.log("userresults", userSearchArray[j].imdbID);
-            if (omdbSearchResults.posterListings[i].imdbID === userSearchArray[j].imdbID) {
-              $("#results").hide(omdbSearchResults.posterListings[i]);
+            if (omdbSearchResults.posterListings[i].imdbID !== userSearchArray[j].imdbID) {
+              $("#results").append(eachMovieTemplate(omdbSearchResults.posterListings[i]));
           }
         }
-        
-
-      }; //end of amy's add
+      };
+      
+       //end of amy's add
         console.log("omdbSearchResults", omdbSearchResults);
-        $("#results").append(eachMovieTemplate(omdbSearchResults));
+        // $("#results").append(eachMovieTemplate(omdbSearchResults));
         $(".rating").rating();
         // test against user's library so we don't populate if already in thing...
       })
