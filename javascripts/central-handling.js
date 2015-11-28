@@ -59,7 +59,7 @@ define(function(require) {
         }
         console.log("omdb1", omdbSearchResults.posterListings[0].imdbID);
         for (var i =0; i < omdbSearchResults.posterListings.length; i++) {
-          for (var j = 0; j < userSearchArray.length; i++) {
+          for (var j = 0; j < userSearchArray.length; j++) {
             console.log("omdbresults", omdbSearchResults.posterListings[i].imdbID);
             console.log("userresults", userSearchArray[j].imdbID);
             if (omdbSearchResults.posterListings[i].imdbID !== userSearchArray[j].imdbID) {
