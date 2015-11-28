@@ -42,12 +42,33 @@ define(function(require) {
       usersLibrary(auth) // collects promise from user-library.js
       .then(function(userUniqueLibrary) {
         userSearchResults = searchMyMovies(searchForThis, userUniqueLibrary);
-        console.log("userSearchResults1", userSearchResults);
         loadMoviesToPage(userSearchResults); // just slaps handlebars on user's search results
         console.log("userSearchResults", userSearchResults);
         return loadSearch.populateMovies(auth, searchForThis);
       })
       .then(function(omdbSearchResults) {
+        //amy added for unique
+        console.log("testomdb", omdbSearchResults);
+        console.log("testsearch", userSearchResults);
+
+        var userSearchArray = [];
+        for (var key in userSearchResults) {
+          userSearchArray[userSearchArray.length] = userSearchResults[key];
+          console.log("userSearchArray", userSearchArray);
+          console.log("userSearchArray0", userSearchArray[0].imdbID);
+        }
+        console.log("omdb1", omdbSearchResults.posterListings[0].imdbID);
+        for (var i =0; i < omdbSearchResults.posterListings.length; i++) {
+          for (var j = 0; j < userSearchArray.length; i++) {
+            console.log("omdbresults", omdbSearchResults.posterListings[i].imdbID);
+            console.log("userresults", userSearchArray[j].imdbID);
+            if (omdbSearchResults.posterListings[i].imdbID === userSearchArray[j].imdbID) {
+              $("#results").hide(omdbSearchResults.posterListings[i]);
+          }
+        }
+        
+
+      }; //end of amy's add
         console.log("omdbSearchResults", omdbSearchResults);
         $("#results").append(eachMovieTemplate(omdbSearchResults));
         $(".rating").rating();
