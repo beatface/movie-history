@@ -25,7 +25,6 @@ Login/Sign up: splash page styling
 	h1 {
 		color: $primarycolor_light;
 		text-transform: uppercase;
-		// font-size: 3em;
 		letter-spacing: 4px;
 		text-shadow: 3px 4px $primarycolor_accentdark;
 		text-align: center;
@@ -128,16 +127,12 @@ Movie poster styling
 
 .poster-display-unit {
 	margin-bottom: 50px;
-
 	.poster {
 		margin-bottom: 10px;
 	}
-	img {
-		width: 100%;
-	}
 }
-.poster-display-unit :not(:first-child) {
-	float: right;
+.poster-controls {
+	min-height: 35px;
 	opacity: .9;
 	font-size: .9em;
 	text-transform: uppercase;
@@ -151,46 +146,53 @@ Movie poster styling
 	}
 }
 
-@media screen and (max-width: 590px) {
-	#filters button {
-		display: block;
-		width: 100%;
-	}
-
-	#filters button:not(:first-child) {
-		border: none;
-	}
-
-	.poster-display-unit {
-		clear: both;
-	}
-}
-
-//This is to put the trash glyphicon over the image of the poster (hopefully)
-.myposter {
+//This is to put the X over the image of the poster (hopefully)
+.poster-display-unit {
    position: relative;
 }
 
-.myposter .glyphicon {
-   position: absolute;
-   top: 10px;
-   right: 10px;
+.delete-button {
    color: white;
-   background-color: rgba(0,0,0,0.75);
-   border-radius: 25%;
-   font-size: 1.25em;
+   font-size: 1.25rem;
+}
+
+.x-background {
+   position: absolute;
+   top: 5px;
+   right: 20px;
+   background-color: black;
+   border-radius: 50%;
+   height: 20px;
+   width: 20px;
+   padding-left: 7px;
+   padding-top: 2px;
 }
 
 .behind {
 	position: absolute;
-    color: white;
+    color: $primarycolor_light;
     top: 20px;
-    left: 10px;
+    right: 20px;
     z-index: -1;
 }
 
-.test {
-	visibility: hidden;
+#all-user-title {
+	margin-top: 0px;
+	color: $primarycolor_light;
+}
+
+.myposter, .poster {
+   min-height: 250px;
+   h3 {
+   	position: absolute;
+    color: $primarycolor_light;
+    top: 25px;
+    right: 20px;
+   }
+
+   img {
+   	max-height: 250px;
+   }
 }
 
 // Modal Styling
@@ -206,5 +208,49 @@ button[watched="true"] {
 
 div[watched="false"] {
   display: none;
+}
+
+//Buttons originally broke at 590px
+@media screen and (max-width: 767px) {
+	.all-title-container {
+		text-align: center;
+	}
+
+	#filters {
+		button {
+			display: block;
+			width: 100%;
+		}
+		button:first-child {
+			border-radius: 15px 15px 0 0;
+		}
+		button:last-child {
+			border-radius: 0 0 15px 15px;
+		}
+	}
+
+	#filters button:not(:first-child) {
+		border: none;
+	}
+
+	.poster-display-unit {
+		clear: both;
+	}
+
+	.myposter, .poster {
+   min-height: 250px;
+   h3 {
+   	position: absolute;
+    color: $primarycolor_light;
+    top: 25px;
+    right: 20px;
+   }
+
+   img {
+   	width: 100%;
+   	max-height: 800px;
+   }
+	}
+
 }
 

@@ -1,9 +1,11 @@
 {{#each posterListings}}
-<div class="col-sm-3 col-xs-12 poster-display-unit">
-	<div class="poster">
-		<img id="{{@key}}" key="{{@key}}" src="{{Poster}}" onError="this.onerror=null;this.src='';">
-		<h1 class="behind">{{Title}}<h1>
+<div class="col-sm-3 col-xs-12 poster-display-unit search-result">
+	<div class="poster" id="{{@key}}">
+		<img id="{{@key}}" class="pull-right" key="{{@key}}" src="{{Poster}}" onError="
+		this.onerror=null;$(this).parent().html('<h3>{{Title}}</h3>');">
 	</div>
-	<button id="{{@key}}" class="movie-add btn btn-default">Add</button>
+	<div class="poster-controls">
+		<button id="{{@key}}" class="movie-add btn btn-default pull-right">Add</button>
+	</div>
 </div>
 {{/each}}
