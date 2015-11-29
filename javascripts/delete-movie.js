@@ -8,9 +8,7 @@ define(function(require) {
 		  url: "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_"+userAuth+"/" + movieKey + "/.json",
 		  method: "DELETE"
 		})
-    .done(function(info) {
-      console.log("AJAX call Deleting", info);
-    });
+    .done();
 
   }
 

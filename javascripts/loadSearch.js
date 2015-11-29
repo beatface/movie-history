@@ -3,7 +3,7 @@ define(["dependencies", "stars", "grabmovies", "q"],
     var allResults = {};
     var authInfo;
 
-
+  
     function populateMovies(passedAuth, userSearchInput) { 
 
       var deferred = Q.defer();
@@ -25,18 +25,18 @@ define(["dependencies", "stars", "grabmovies", "q"],
 
         // Adds data from just this particular movie to user's library of movies, not yet functioning
     function clickToAdd(e) {
-      console.log("e", e);
       var thisMovieImdbId = e.target.id; // grabs movie in search results from id on add button
       // var thisMovieImdbId = allResults[thisMovieId].imdbID; // grabs proper movie information given correct id
-      // $.ajax({ // Makes the next api request to get full listing on movie, not just search results (which were abbreviated)
-      //   url: "http://www.omdbapi.com/?i=" + thisMovieImdbId + "&r=json"
-      // }).done(function(fullMovieListing) {
+      $.ajax({ // Makes the next api request to get full listing on movie, not just search results (which were abbreviated)
+        url: "http://www.omdbapi.com/?i=" + thisMovieImdbId + "&r=json"
+      }).done(function(fullMovieListing) {
 
-      //   fullMovieListing.Poster = "http://img.omdbapi.com/?i=" + thisMovieImdbId + "&apikey=8513e0a1";
-      //   // Sends full movie listing, with user login ID, to store on website database
-      //   grabmovies.findMovie(fullMovieListing, authInfo);
+        fullMovieListing.Poster = "http://img.omdbapi.com/?i=" + thisMovieImdbId + "&apikey=8513e0a1";
+        
+        // Sends full movie listing, with user login ID, to store on website database
+        grabmovies.findMovie(fullMovieListing, authInfo);
 
-      // });
+      });
     }
 
     function addSearchModal(e) {

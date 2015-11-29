@@ -1,8 +1,8 @@
 {{#each this}}
 <div class="col-sm-3 col-xs-12 poster-display-unit" key="{{imdbID}}" watchtoggle="{{watched}}" fave="{{rating}}">
-	<div class="x-background">
-		<a href="#" class="delete-button">
-			<span key="{{imdbID}}">&times;</span>
+	<div id="{{imdbID}}" class="delete-button x-background">
+		<a href="#">
+			<span key="{{@key}}">&times;</span>
 		</a>
 	</div>
 	<div class="myposter" id="{{imdbID}}" key="{{imdbID}}">
@@ -11,9 +11,9 @@
 	</div>
 	<div class="poster-controls">
 		<button id="{{imdbID}}" class="movie-add btn btn-default pull-right">Add</button>
-		<button class="movie-watch btn btn-default pull-right" id="{{imdbID}}" watched="{{watched}}">Watch</button>
+		<button class="movie-watch btn btn-default pull-right" id="{{imdbID}}" watched="{{watched}}" key="{{@key}}">Watch</button>
 		<div id="{{imdbID}}" class="stars pull-right" watched="{{watched}}">
-			<input id="{{imdbID}}" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false" data-show-caption="false" data-size="xs" value="{{rating}}">
+			<input id="{{@key}}" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false" data-show-caption="false" data-size="xs" value="{{rating}}">
 		</div>
 	</div>
 </div>
