@@ -4,4 +4,5 @@ define(function(require) {
   var h = require("hbs");
   var firebase = require("firebase");
   var Q = require("q");
+  var _ = require("lodash");
 });

@@ -27,6 +27,14 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
       $(".rating").rating(); // stars plugin
     }
 
+
+
+
+
+
+
+
+
     function searchUsSomeResults(searchForThis, userMovieLibrary) {
       console.log("searchUsSomeResults triggered");
       console.log("userMovieLibrary", userMovieLibrary);
@@ -35,46 +43,50 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
 
         .then(function(omdbSearchResults) {
 
-          // Crafts posters for display
-          allResults = omdbSearchResults.Search; // Creates an array of all search results
-
-          // Cycles thru and changes poster so we have permission to print to page
+          allResults = omdbSearchResults.Search;
+          // Loads proper poster with permissions
           for (var i = 0; i < allResults.length; i++) {
             allResults[i].Poster = "http://img.omdbapi.com/?i=" + allResults[i].imdbID + "&apikey=8513e0a1";
           }
 
-          // console.log("userMovieLibrary", userMovieLibrary);
+          var processedResults = searchMyMovies(searchForThis, userMovieLibrary, allResults);
 
-          for (var i = 0; i < allResults.length; i++) {
-            var thisWholeMovie = allResults[i];
-            var thisMovieTitle = allResults[i].Title;
-            arrayOfAllMovies[i] = {[thisMovieTitle]: thisWholeMovie};
-          }
-          console.log("arrayOfAllMovies", arrayOfAllMovies);
 
-          for (var eachMovie in userMovieLibrary) {
-            var thisWholeMovie = userMovieLibrary[eachMovie];
-            var thisMovieTitle = userMovieLibrary[eachMovie].Title;
-            arrayOfAllMovies.push({[thisMovieTitle]: thisWholeMovie});
-          }
-          arrayOfAllMovies.sort(); // should alpha by title, since title is key
-          // Making sure unique is probably going to go here.
+          loadMoviesToPage(processedResults);
 
-          var sortedObjectOfMovies = {};
+          // conflatedLibraries = _.sortBy(conflatedLibraries, function(obj) {
+          //   return obj.title;
+          // });
 
-          for (var j = 0; j < arrayOfAllMovies.length; j++) {
-            var thisWholeMovie = arrayOfAllMovies[j];
-            for (var thisKey in sortedObjectOfMovies) {
-              sortedObjectOfMovies[thisKey] = thisWholeMovie;
-              console.log("sortedObjectOfMovies[thisKey]", sortedObjectOfMovies[thisKey]);
-            }
-            // objectOfAllMovies[arrayOfAllMovies[j].Title] = arrayOfAllMovies[j];
-          }
-          // console.log("sortedObjectOfMovies", sortedObjectOfMovies);
-          
-          loadMoviesToPage(sortedObjectOfMovies);
-          // $(".rating").rating();
-          // test against user's library so we don't populate if already in thing...
+
+          // omdbSearchResults.forEach(function(movieObj) {
+          //   check for object in array as opposed to title...
+          //   if(!arrayFromFB.contains(movieObj.title)) {
+          //     arrayFromFB.push(movieObj)
+          //   }
+          // });
+
+
+
+
+          // var resultsOfSearch = searchMyMovies(searchForThis, conflatedLibraries);
+          // loadMoviesToPage(resultsOfSearch);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////
+
         })
         .fail(function(error) {
           console.log("error", error);
@@ -89,7 +101,6 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
       var firebaseConnection = new Firebase(fireurl);
       firebaseConnection.on("value", function(snapshot) {
         userMovieLibrary = snapshot.val();
-        console.log("userMovieLibrary", userMovieLibrary);
 
 
         // On userMovieLibrary state change, carries thru same search term and keeps page populated.
@@ -176,7 +187,6 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
         // If user entered value into search bar
         else {  
           userSearchField.val("");
-          console.log("userMovieLibrary in search", userMovieLibrary);
           searchUsSomeResults(userSearchValue, userMovieLibrary);
         } // closes else
 
