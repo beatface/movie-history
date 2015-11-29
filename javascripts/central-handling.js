@@ -136,11 +136,6 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
         }); // closes authCall promise
     }); // Closes Login click function
 
-    // when you click on a poster, addModal file gets called and modal appears with movie info.
-    $('body').on('click', '.poster', function(event) {
-      loadSearch.addSearchModal(event);
-    });
-
     $('body').on('click', '.myposter', function(event) {
       var movieKey = event.target.getAttribute('key');
       console.log("movieKey", movieKey); 

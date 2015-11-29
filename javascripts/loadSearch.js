@@ -39,24 +39,8 @@ define(["dependencies", "stars", "grabmovies", "q"],
       });
     }
 
-    function addSearchModal(e) {
-      var thisMovieId = e.target.id;
-      var thisMovieImdbId = allResults[thisMovieId].imdbID; // grabs proper movie information given correct id
-      $.ajax({ // Makes the next api request to get full listing on movie, not just search results (which were abbreviated)
-        url: "http://www.omdbapi.com/?i=" + thisMovieImdbId + "&r=json"
-      }).done(function(fullMovieListing) {
-        console.log("AJAX call addSearchModal", fullMovieListing);
-        require(['hbs!../templates/modal'], function(modalTemplate) {
-          $("#modal-body").html(modalTemplate(fullMovieListing));
-      });
-      $(".modal-title").html(fullMovieListing.Title);
-      $('#posterModal').modal();
-     });
-    }
-
     return {
       clickToAdd: clickToAdd,
-      populateMovies: populateMovies,
-      addSearchModal: addSearchModal
+      populateMovies: populateMovies
     };
 });
