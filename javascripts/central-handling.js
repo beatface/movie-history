@@ -142,7 +142,8 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
     });
 
     $('body').on('click', '.myposter', function(event) {
-      var movieKey = event.target.getAttribute('key'); 
+      var movieKey = event.target.getAttribute('key');
+      console.log("movieKey", movieKey); 
       addModal(auth, movieKey);
     });
 
@@ -182,7 +183,6 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
 
   // Delete Movie
   $(document).on("click", ".delete-button", function(e){
-    console.log("You clicked the delete button");
     var movieKey = e.target.getAttribute('key');
     deleteMovie(movieKey, auth);
   });
@@ -193,7 +193,6 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
   $(document).on("click", ".movie-watch", function(e){
     console.log("You clicked the watch button");
     var movieKey = e.target.getAttribute('key');
-    console.log("movieKey", movieKey);
     movieChange.watchMovie(movieKey, auth);
   });
 
@@ -202,7 +201,6 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
   $(document).on('rating.change', function(event, starValue) {
     console.log(starValue);
     var starKey = event.target.id;
-    console.log("starKey", starKey);
     movieChange.rateMovie(starKey, auth, starValue);
   });
 

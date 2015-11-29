@@ -5,8 +5,8 @@
 			<span key="{{@key}}">&times;</span>
 		</a>
 	</div>
-	<div class="myposter" id="{{imdbID}}" key="{{imdbID}}">
-		<img class="pull-right" key="{{imdbID}}" src="{{Poster}}" onError="
+	<div class="myposter" id="{{@key}}" key="{{@key}}">
+		<img class="pull-right" key="{{@key}}" src="{{Poster}}" onError="
 		this.onerror=null;$(this).parent().html('<h3>{{Title}}</h3>');">
 	</div>
 	<div class="poster-controls">
