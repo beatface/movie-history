@@ -10,9 +10,8 @@ define(function(require) {
       }
 
     });
+
     return preferenceLibrary;
-
-
 
   }
 
@@ -31,10 +30,6 @@ define(function(require) {
         userMatchingSearch[thisMovie] = userMovieLibrary[thisMovie];
       }
     } // closes for loop
-
-
-    console.log("userMatchingSearch", userMatchingSearch);
-    console.log("omdbLibraryMatchingSearch", omdbLibraryMatchingSearch);
 
     return reconcileLibraries(userMatchingSearch, omdbLibraryMatchingSearch);
 

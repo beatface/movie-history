@@ -11,8 +11,8 @@
 	</div>
 	<div class="poster-controls">
 		<button id="{{imdbID}}" class="movie-add btn btn-default pull-right">Add</button>
-		<button class="movie-watch btn btn-default pull-right" key="{{imdbID}}" watched="{{watched}}">Watch</button>
-		<div class="stars pull-right" watched="{{watched}}">
+		<button class="movie-watch btn btn-default pull-right" id="{{imdbID}}" watched="{{watched}}">Watch</button>
+		<div id="{{imdbID}}" class="stars pull-right" watched="{{watched}}">
 			<input id="{{imdbID}}" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false" data-show-caption="false" data-size="xs" value="{{rating}}">
 		</div>
 	</div>
