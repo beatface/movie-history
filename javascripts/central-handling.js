@@ -10,6 +10,9 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
     var email, password;
     var signup = false;
     var userSearchValue;
+    var allResults = {};
+    var userMovieLibrary = {};
+
 
     // Enters second page when user authenticates
     function changePageOnAuth () {
@@ -24,13 +27,35 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
       $(".rating").rating(); // stars plugin
     }
 
-    function searchUsSomeResults(searchForThis) {
+    function searchUsSomeResults(searchForThis, userMovieLibrary) {
       console.log("searchUsSomeResults triggered");
-
-      loadSearch.populateMovies(auth, searchForThis)
+      console.log("userMovieLibrary", userMovieLibrary);
+      var displayAllMovies = {};
+      loadSearch.populateMovies(auth, searchForThis) // returns movieSearchResults
 
         .then(function(omdbSearchResults) {
-          $("#results").append(eachMovieTemplate(omdbSearchResults));
+
+          // Crafts posters for display
+          allResults = omdbSearchResults.Search; // Creates an array of all search results
+
+          // Cycles thru and changes poster so we have permission to print to page
+          for (var i = 0; i < allResults.length; i++) {
+            allResults[i].Poster = "http://img.omdbapi.com/?i=" + allResults[i].imdbID + "&apikey=8513e0a1";
+          }
+
+          // console.log("userMovieLibrary", userMovieLibrary);
+
+          for (var i = 0; i < allResults.length; i++) {
+            displayAllMovies[allResults[i].Title] = allResults[i];
+          }
+
+          for (var eachMovie in userMovieLibrary) {
+            displayAllMovies[userMovieLibrary[eachMovie].Title] = userMovieLibrary[eachMovie];
+          }
+
+          console.log("displayAllMovies", displayAllMovies);
+
+          $("#results").html(eachMyMoviesTemplate(displayAllMovies));
           $(".rating").rating();
           // test against user's library so we don't populate if already in thing...
         })
@@ -41,25 +66,25 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
 
     // Puts results to DOM, according to which user loads
     function beginWebApplication(thisUserAuth, email, password) {
-      console.log("beginWebApp triggered");
-      usersLibrary(auth) // receives promise state from user-library.js
 
-        .then(function(allUserMovies) {
-          var fireurl = "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_" + thisUserAuth +"/";
-          var firebaseConnection = new Firebase(fireurl);
-          firebaseConnection.on("value", function(snapshot) {
-            var movie = snapshot.val();
+      console.log("something here? creates firebase connection to this user library");
+      var fireurl = "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_" + thisUserAuth +"/";
+      var firebaseConnection = new Firebase(fireurl);
+      firebaseConnection.on("value", function(snapshot) {
+        userMovieLibrary = snapshot.val();
+        console.log("userMovieLibrary", userMovieLibrary);
 
-            loadMoviesToPage(movie);
-            // if (userSearchValue) {
-            //   searchUsSomeResults(userSearchValue);
-            // }
-          }); //End on Value Function
 
-        }) // End then
-        .fail(function(error) {
-          console.log("error", error);
-        });
+        // On userMovieLibrary state change, carries thru same search term and keeps page populated.
+        if (userSearchValue) {
+          console.log("if that recognizes search");
+          searchUsSomeResults(userSearchValue, userMovieLibrary);
+        } else {
+          console.log("else that loads page");
+          loadMoviesToPage(userMovieLibrary);
+        }
+      }); //End on Value Function
+
     } // closes beginWebApplication function
     
     //Start logout function
@@ -134,13 +159,12 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
         // If user entered value into search bar
         else {  
           userSearchField.val("");
-          searchUsSomeResults(userSearchValue);
+          console.log("userMovieLibrary in search", userMovieLibrary);
+          searchUsSomeResults(userSearchValue, userMovieLibrary);
         } // closes else
 
       } // closes if user hits enter
     }); // closes keyup
-
-    ////// BELOW HERE, FUNCTIONALITY WILL CHANGE ///////
  
   $("#search-my-movie-library").on("click", function(){
     searchMyMovies(auth); // potentially need userlibrary and title collected on click

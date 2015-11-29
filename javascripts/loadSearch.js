@@ -14,17 +14,7 @@ define(["dependencies", "stars", "grabmovies", "q"],
           url: "http://www.omdbapi.com/?s=" + userSearchInput
         }).done(function(movieData) {
           console.log("AJAX call searching", movieData);
-          allResults = movieData.Search; // Creates an array of all search results
-          var postersForTemplate = {}; // Prepares object to send to hbs template
-
-          // Cycles thru and changes poster so we have permission to print to page
-          for (var i = 0; i < allResults.length; i++) {
-            allResults[i].Poster = "http://img.omdbapi.com/?i=" + allResults[i].imdbID + "&apikey=8513e0a1";
-          }
-
-          postersForTemplate = {"posterListings": allResults}; 
-
-          deferred.resolve(postersForTemplate); // where promise delivers resolve, send posters object
+          deferred.resolve(movieData); // where promise delivers resolve, send posters object
         })
         .fail(function(error) {
           console.log("error", error);
@@ -36,8 +26,10 @@ define(["dependencies", "stars", "grabmovies", "q"],
 
         // Adds data from just this particular movie to user's library of movies, not yet functioning
     function clickToAdd(e) {
-      var thisMovieId = e.target.id; // grabs movie in search results from id on add button
-      var thisMovieImdbId = allResults[thisMovieId].imdbID; // grabs proper movie information given correct id
+      console.log("e", e);
+      var thisMovieImdbId = e.target.id; // grabs movie in search results from id on add button
+      console.log("thisMovieImdbId", thisMovieImdbId);
+      // var thisMovieImdbId = allResults[thisMovieId].imdbID; // grabs proper movie information given correct id
       $.ajax({ // Makes the next api request to get full listing on movie, not just search results (which were abbreviated)
         url: "http://www.omdbapi.com/?i=" + thisMovieImdbId + "&r=json"
       }).done(function(fullMovieListing) {
