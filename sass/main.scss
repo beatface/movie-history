@@ -162,10 +162,11 @@ Movie poster styling
    right: 20px;
    background-color: black;
    border-radius: 50%;
-   height: 20px;
-   width: 20px;
+   height: 22px;
+   width: 22px;
    padding-left: 7px;
-   padding-top: 2px;
+   padding-top: 1px;
+   opacity: .7;
 }
 
 .behind {
@@ -193,6 +194,10 @@ Movie poster styling
    img {
    	max-height: 250px;
    }
+}
+
+.pull-right {
+	padding-bottom: 7px;
 }
 
 // Modal Styling

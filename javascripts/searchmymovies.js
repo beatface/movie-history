@@ -3,21 +3,22 @@ define(function(require) {
   var _$_ = require("dependencies");
 
   function processSearchResults(searchValue, userMovieLibrary) {
-    var lowercaseSearchValue = searchValue.toLowerCase();
+    
     var searchResults = {};
+    var lowercaseSearchValue = searchValue.toLowerCase();
 
     for (var thisMovie in userMovieLibrary) {
-      // console.log("thisMovie", userMovieLibrary[thisMovie]);
       var lowercaseMovie = userMovieLibrary[thisMovie].Title.toLowerCase();
       if (lowercaseMovie.indexOf(lowercaseSearchValue) > -1) {
         searchResults[thisMovie] = userMovieLibrary[thisMovie];
       }
-    } // closes outer for loop
-
+    } // closes for loop
+    
     return searchResults;
-  } // closes processSearchResults
+
+
+  } // closes function processSearchResults
 
   return processSearchResults;
   
-
 });

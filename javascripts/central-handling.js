@@ -1,9 +1,9 @@
-define(["dependencies", "authcall", "return-users", "create-user-in-private-firebase", "q", "loadSearch", "user-library", "delete-movie", "movie-change", "user-sign-up", "login", "searchmymovies", "add-modal", "hbs!../templates/each_my_movies", "hbs!../templates/each_movie"], 
-  function(_$_, authCall, returnusers, createUserInPrivateFirebase, Q, loadSearch, usersLibrary, deleteMovie, movieChange, userSignUp, loginUniqueUser, searchMyMovies, addModal, eachMyMoviesTemplate, eachMovieTemplate) {
+define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loadSearch", "user-library", "delete-movie", "movie-change", "user-sign-up", "login", "searchmymovies", "add-modal", "hbs!../templates/each_my_movies", "hbs!../templates/each_movie"], 
+  function(_$_, authCall, createUserInPrivateFirebase, Q, loadSearch, usersLibrary, deleteMovie, movieChange, userSignUp, loginUniqueUser, searchMyMovies, addModal, eachMyMoviesTemplate, eachMovieTemplate) {
     
     $(".page").hide(); // on page load, everything is hidden
 
-    $("#entry-screen").show();
+    $("#entry-screen").show(); // presents user with login
 
     var auth;
     var myFirebaseRef = new Firebase("https://ama-moviehistory.firebaseio.com/");
@@ -20,48 +20,42 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
 
     // Applies handlebar template and stars plugin
     function loadMoviesToPage (library) {
-      $("#results").html(eachMyMoviesTemplate(library));
-      $(".rating").rating();
+      $("#results").html(eachMyMoviesTemplate(library)); // handlebars template
+      $(".rating").rating(); // stars plugin
     }
 
     function searchUsSomeResults(searchForThis) {
-      usersLibrary(auth) // collects promise from user-library.js
-      .then(function(userUniqueLibrary) {
-        userSearchResults = searchMyMovies(searchForThis, userUniqueLibrary);
-        loadMoviesToPage(userSearchResults); // just slaps handlebars on user's search results
-        console.log("userSearchResults", userSearchResults);
-        return loadSearch.populateMovies(auth, searchForThis);
-      })
-      .then(function(omdbSearchResults) {
-        console.log("omdbSearchResults", omdbSearchResults);
-        $("#results").append(eachMovieTemplate(omdbSearchResults));
-        $(".rating").rating();
-        // test against user's library so we don't populate if already in thing...
-      })
-      .fail(function(error) {
-        console.log("error", error);
+      console.log("searchUsSomeResults triggered");
+
+      loadSearch.populateMovies(auth, searchForThis)
+
+        .then(function(omdbSearchResults) {
+          $("#results").append(eachMovieTemplate(omdbSearchResults));
+          $(".rating").rating();
+          // test against user's library so we don't populate if already in thing...
+        })
+        .fail(function(error) {
+          console.log("error", error);
       });
     } // END SEARCH OMDB FUNCTION
 
+    // Puts results to DOM, according to which user loads
     function beginWebApplication(thisUserAuth, email, password) {
+      console.log("beginWebApp triggered");
       usersLibrary(auth) // receives promise state from user-library.js
-      // Puts results to DOM, according to which user loads
 
         .then(function(allUserMovies) {
           var fireurl = "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_" + thisUserAuth +"/";
-          console.log("fireurl", fireurl);
           var firebaseConnection = new Firebase(fireurl);
           firebaseConnection.on("value", function(snapshot) {
             var movie = snapshot.val();
 
             loadMoviesToPage(movie);
-            console.log("userSearchValue", userSearchValue);
-            searchUsSomeResults(userSearchValue);
-
-            console.log("movie", movie);
+            // if (userSearchValue) {
+            //   searchUsSomeResults(userSearchValue);
+            // }
           }); //End on Value Function
 
-          // loadMoviesToPage(allUserMovies);
         }) // End then
         .fail(function(error) {
           console.log("error", error);
@@ -70,12 +64,11 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     
     //Start logout function
     $("#logout-button").click(function(e) {
-      console.log("You have clicked the logout button!", auth);
       if (auth) {
         auth = null;
         myFirebaseRef.unauth();
-        $("#results").html("");
-        $(".page").hide(); // potentially change in future
+        $("#results").html(""); // cleans out user library
+        $(".page").hide(); // turns back to login screen
         $("#entry-screen").show();
       }
     }); //END LOGOUT FUNCTION
@@ -88,7 +81,6 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
       createUserInPrivateFirebase(email, password, myFirebaseRef)
         .then(function(authConfirmNumber) {
           auth = authConfirmNumber.uid;
-          console.log("authConfirm", auth);
           changePageOnAuth();
           beginWebApplication(auth, email, password); // sends to main page functionality
         })
@@ -142,7 +134,6 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
         // If user entered value into search bar
         else {  
           userSearchField.val("");
-          console.log("userInput", userSearchValue);
           searchUsSomeResults(userSearchValue);
         } // closes else
 
@@ -156,20 +147,23 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
 
   }); // closes click function of search my movies
 
+  // Add Movie
   $(document).on("click", ".movie-add", function(e){
     console.log("You clicked the add button");
     loadSearch.clickToAdd(e);
   });
 
+  //////// Movie State Changes ///////
+
+  // Delete Movie
   $(document).on("click", ".delete-button", function(e){
     console.log("You clicked the delete button");
     var movieKey = e.target.getAttribute('key');
-    deleteMovie(movieKey, auth)
-    .then(function(){
-      // usersLibrary(auth);
-    });
+    deleteMovie(movieKey, auth);
   });
 
+
+  // Watch Movie
   $(document).on("click", ".movie-watch", function(e){
     console.log("You clicked the watch button");
     var movieKey = e.target.getAttribute('key');
@@ -179,6 +173,8 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     });
   });
 
+
+  // Rate Movie
   $(document).on('rating.change', function(event, starValue) {
     console.log(starValue);
     var starKey = event.target.id;
@@ -189,7 +185,9 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     });
   });
 
+  /////// Page Turning on user filtering. ///////
 
+  // See All Movies
   $(document).on("click", ".clickAll", function(e){
     console.log("You clicked the All button at top");
     userSearchValue = "";
@@ -200,6 +198,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     });
   });
 
+  // See Watched Movies
   $(document).on("click", ".clickWatch", function(e){
     console.log("You clicked the WATCHED button at top");
     $("div[watchtoggle='true']").show();
@@ -208,6 +207,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     $(".search-result").hide();
   });
 
+  // See Unwatched Movies
   $(document).on("click", ".clickUnwatch", function(e){
     console.log("You clicked the UNWATCHED button at top");
     $("div[watchtoggle='true']").hide();
@@ -216,6 +216,7 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     $(".search-result").hide();
   });
 
+  // See Favorited Movies
   $(document).on("click", ".clickFave", function(e){
     console.log("You clicked the Fave button at top");
     $("div[watchtoggle='true']").hide();
@@ -225,6 +226,10 @@ define(["dependencies", "authcall", "return-users", "create-user-in-private-fire
     $(".search-result").hide();
   });
 
+
+
+
+
+
+
 });// Close page
-
-

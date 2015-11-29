@@ -1,4 +1,4 @@
-define(["create-user-in-private-firebase", "return-users"], function(createUserInPrivateFirebase, returnusers) {
+define(["create-user-in-private-firebase"], function(createUserInPrivateFirebase) {
 
   	function firebaseAuthentication (authData, myFirebaseRef) {
       console.log("authData from signup", authData);
@@ -36,7 +36,6 @@ define(["create-user-in-private-firebase", "return-users"], function(createUserI
 	      .fail(function(error) {
 	          console.log("error", error);
 	        });
-	    // return authData;
 	  } // closes function registerUser
 	
 	return registerUser;
