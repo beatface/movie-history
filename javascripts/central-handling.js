@@ -30,7 +30,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
     function searchUsSomeResults(searchForThis, userMovieLibrary) {
       console.log("searchUsSomeResults triggered");
       console.log("userMovieLibrary", userMovieLibrary);
-      var displayAllMovies = {};
+      var arrayOfAllMovies = [];
       loadSearch.populateMovies(auth, searchForThis) // returns movieSearchResults
 
         .then(function(omdbSearchResults) {
@@ -46,17 +46,34 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
           // console.log("userMovieLibrary", userMovieLibrary);
 
           for (var i = 0; i < allResults.length; i++) {
-            displayAllMovies[allResults[i].Title] = allResults[i];
+            var thisWholeMovie = allResults[i];
+            var thisMovieTitle = allResults[i].Title;
+            arrayOfAllMovies[i] = {[thisMovieTitle]: thisWholeMovie};
           }
+          console.log("arrayOfAllMovies", arrayOfAllMovies);
 
           for (var eachMovie in userMovieLibrary) {
-            displayAllMovies[userMovieLibrary[eachMovie].Title] = userMovieLibrary[eachMovie];
+            var thisWholeMovie = userMovieLibrary[eachMovie];
+            var thisMovieTitle = userMovieLibrary[eachMovie].Title;
+            arrayOfAllMovies.push({[thisMovieTitle]: thisWholeMovie});
           }
+          arrayOfAllMovies.sort(); // should alpha by title, since title is key
+          // Making sure unique is probably going to go here.
 
-          console.log("displayAllMovies", displayAllMovies);
+          var sortedObjectOfMovies = {};
 
-          $("#results").html(eachMyMoviesTemplate(displayAllMovies));
-          $(".rating").rating();
+          for (var j = 0; j < arrayOfAllMovies.length; j++) {
+            var thisWholeMovie = arrayOfAllMovies[j];
+            for (var thisKey in sortedObjectOfMovies) {
+              sortedObjectOfMovies[thisKey] = thisWholeMovie;
+              console.log("sortedObjectOfMovies[thisKey]", sortedObjectOfMovies[thisKey]);
+            }
+            // objectOfAllMovies[arrayOfAllMovies[j].Title] = arrayOfAllMovies[j];
+          }
+          // console.log("sortedObjectOfMovies", sortedObjectOfMovies);
+          
+          loadMoviesToPage(sortedObjectOfMovies);
+          // $(".rating").rating();
           // test against user's library so we don't populate if already in thing...
         })
         .fail(function(error) {
