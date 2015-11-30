@@ -9,7 +9,7 @@ define(function(require) {
     };
 
     $.ajax({
-      url: "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_"+userAuth+"/" + movieKey + "/.json",
+      url: "https://forked-movie-history.firebaseio.com/all-users-libraries/user_library_"+userAuth+"/" + movieKey + "/.json",
       method: "PATCH",
       data: JSON.stringify(newRating)
     })
@@ -26,7 +26,7 @@ define(function(require) {
     };
 
     $.ajax({
-		  url: "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_"+userAuth+"/" + movieKey + "/.json",
+		  url: "https://forked-movie-history.firebaseio.com/all-users-libraries/user_library_"+userAuth+"/" + movieKey + "/.json",
 		  method: "PATCH",
       data: JSON.stringify(watch)
 		})

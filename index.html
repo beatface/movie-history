@@ -1,113 +1,105 @@
 <!doctype html>
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Movie History</title>
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/lib/bower_components/bootstrap-star-rating/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="styles/main.css">
-</head>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Movie History</title>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="lib/bower_components/bootstrap-star-rating/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css">
+	</head>
 
-<body>
+	<body>
 
-<!-- Click poster modal -->
-	<div class="modal fade" id="posterModal">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h4 class="modal-title">Your Movie</h4>
-	      </div>
-	      <div id="modal-body" class="modal-body">
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div><!-- /.modal-content -->
-	  </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
+		<!-- Click poster modal -->
+		<div class="modal fade" id="posterModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title">Your Movie</h4>
+		      </div>
+		      <div id="modal-body" class="modal-body">
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
-<!-- Begin Splash Page -->
+		<!-- Begin Splash Page -->
+		<section id="entry-screen" class="page">
+			<div id="splash-login">
+			    <!-- Brand -->
+			    <h1>Movie History</h1>
 
-<section id="entry-screen" class="page">
-					  
-	  <div id="splash-login">
+			    <!-- User inputs email/password for login/register -->
+			    <input class="middle form-control" type="text" id="email" placeholder="Enter Email" autofocus>
+			    <input class="middle form-control" type="password" id="password" placeholder="Enter Password">
 
-	    <!-- Brand -->
-	    <h1>Movie History</h1>
+			    <!-- Chooses to login or signup, if correct, loads .main-page -->
+			    <div class="signin-clickers">
+				    <!-- Login -->
+				    <button class="middle page-turn btn btn-default" type="button" id="login" next="main-page">Login</button>
 
-	    <!-- User inputs email/password for login/register -->
-	    <input class="middle form-control" type="text" id="email" placeholder="Enter Email" autofocus>
-	    <input class="middle form-control" type="password" id="password" placeholder="Enter Password">
-
-	    <!-- Chooses to login or signup, if correct, loads .main-page -->
-	    <div class="signin-clickers">
-		    <!-- Login -->
-		    <button class="middle page-turn btn btn-default" type="button" id="login" next="main-page">Login</button>
-
-		    <!-- Signup -->
-		    <button class="middle page-turn btn btn-default" type="button" id="signupButton" next="main-page">Sign Up</button>
-		</div><!-- closes .signin-clickers -->
-	  </div>
-
-</section>
-
-<!-- End Splash Page -->
-
-<!-- Begin Main Page where Results Show -->
-
-<section class="page main-page">
-
-	<!-- NAVIGATION -->
-		<nav class="navbar navbar-default">
-		  <div class="container-fluid">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">Movie History</a>
-		    </div>
-	        <div class="navbar-form navbar-left form-group">
-	        	<input type="text" class="form-control search-all-movies" placeholder="Search for a movie...">
-	        </div>
-	    	<div id="logout-location" class="nav navbar-nav navbar-right">
-	    		<button id="logout-button" class="btn navbar-btn">Log Out</button>
-	    	</div>
-		  </div><!-- /.container-fluid -->
-		</nav>
+				    <!-- Signup -->
+				    <button class="middle page-turn btn btn-default" type="button" id="signupButton" next="main-page">Sign Up</button>
+				</div><!-- closes .signin-clickers -->
+			  </div>
+		</section>
+		<!-- End Splash Page -->
 
 
-	<div class="row">
-			<div id="filters" class="btn-group col-xs-8 col-sm-10 col-sm-offset-1 col-xs-offset-2" role="group" aria-label="...">
-			  <button type="button" class="btn btn-default clickAll">All</button>
-			  <button type="button" class="btn btn-default clickWatch">Watched</button>
-			  <button type="button" class="btn btn-default clickUnwatch">Unwatched</button>
-			  <button type="button" class="btn btn-default clickFave">Favorites</button>
-			</div> <!-- holds main page where results load -->
-	</div>
-	<div class="row">
-			<div class="all-title-container col-xs-8 col-sm-10 col-sm-offset-1 col-xs-offset-2">
-				<h3 id="all-user-title">All Your Current Movies</h3>
+
+		<!-- Begin Main Page where Results Show -->
+		<section class="page main-page" style="display: none">
+			<!-- NAVIGATION -->
+			<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="#">Movie History</a>
+			    </div>
+		        <div class="navbar-form navbar-left form-group">
+		        	<input type="text" class="form-control search-all-movies" placeholder="Search for a movie...">
+		        </div>
+		    	<div id="logout-location" class="nav navbar-nav navbar-right">
+		    		<button id="logout-button" class="btn navbar-btn">Log Out</button>
+		    	</div>
+			  </div><!-- /.container-fluid -->
+			</nav>
+
+			<div class="row">
+				<div id="filters" class="btn-group col-xs-8 col-sm-10 col-sm-offset-1 col-xs-offset-2" role="group" aria-label="...">
+					<button type="button" class="btn btn-default clickAll">All</button>
+					<button type="button" class="btn btn-default clickWatch">Watched</button>
+					<button type="button" class="btn btn-default clickUnwatch">Unwatched</button>
+					<button type="button" class="btn btn-default clickFave">Favorites</button>
+				</div> <!-- holds main page where results load -->
 			</div>
-		<div id="basic" class="container col-xs-8 col-sm-10 col-sm-offset-1 col-xs-offset-2">
+			<div class="row">
+				<div class="all-title-container col-xs-8 col-sm-10 col-sm-offset-1 col-xs-offset-2">
+					<h3 id="all-user-title">All Your Current Movies</h3>
+				</div>
+				<div id="basic" class="container col-xs-8 col-sm-10 col-sm-offset-1 col-xs-offset-2">
+					<!-- FILTER RESULTS -->
+					<div id="results" class="row">
 
-			<!-- FILTER RESULTS -->
-			<div id="results" class="row">
 
 
-
+					</div>
+					<!-- END FILTER RESULTS -->
+				</div> <!--closes container that holds entire page -->
 			</div>
-			<!-- END FILTER RESULTS -->
+		</section>
 
-		</div> <!--closes container that holds entire page -->
-	</div>
-</section>
+		<!-- End Main Page Where Results Show -->
 
-<!-- End Main Page Where Results Show -->
+		<!-- Javascript land -->
+		<script data-main="javascripts/main.js" src="lib/bower_components/requirejs/require.js"></script>
 
-<!-- Javascript land -->
-<script data-main="javascripts/main.js" src="lib/bower_components/requirejs/require.js"></script>
-
-</body>
+	</body>
 </html>

@@ -19,7 +19,7 @@ define(function(require) {
     $("#entry-screen").show(); // presents user with login
 
     var auth;
-    var myFirebaseRef = new Firebase("https://ama-moviehistory.firebaseio.com/");
+    var myFirebaseRef = new Firebase("https://forked-movie-history.firebaseio.com/");
     var email, password;
     var signup = false;
     var userSearchValue;
@@ -30,7 +30,7 @@ define(function(require) {
 
     // Enters second page when user authenticates
     function changePageOnAuth () {
-      $(".main-page").show();
+      $(".main-page").removeAttr("style");
       $("#entry-screen").hide();
       $('#password').val("");
     }
@@ -101,7 +101,7 @@ define(function(require) {
     // Puts results to DOM, according to which user loads
     function beginWebApplication(thisUserAuth, email, password) {
 
-      var fireurl = "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_" + thisUserAuth +"/";
+      var fireurl = "https://forked-movie-history.firebaseio.com/all-users-libraries/user_library_" + thisUserAuth +"/";
       var firebaseConnection = new Firebase(fireurl);
       firebaseConnection.on("value", function(snapshot) {
         userMovieLibrary = snapshot.val();
