@@ -61,6 +61,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
           }
 
           var processedResults = searchMyMovies(searchForThis, userMovieLibrary, allResults);
+          console.log("processedResults IS THIS AN ARRAY OR OBJECT?", processedResults);
           loadMoviesToPage(processedResults);
 
         })
