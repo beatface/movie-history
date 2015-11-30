@@ -142,6 +142,11 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
       addModal(auth, movieKey);
     });
 
+    $('body').on('click', '.poster', function(event) {
+      loadSearch.addSearchModal(event);
+    });
+
+
     // Search bar functionality
     var userSearchField = $(".search-all-movies");
     userSearchField.keyup(function(e) {

@@ -12,6 +12,8 @@ define(["dependencies", "stars", "grabmovies", "q"],
       $.ajax({ //grabs omdb api with userSearchInput value
           url: "http://www.omdbapi.com/?s=" + userSearchInput
         }).done(function(movieData) {
+          allResults = movieData.Search;
+          console.log("allResults", allResults);
           console.log("AJAX call searching", movieData);
           deferred.resolve(movieData); // where promise delivers resolve, send movieData object
         })
@@ -26,11 +28,11 @@ define(["dependencies", "stars", "grabmovies", "q"],
         // Adds data from just this particular movie to user's library of movies, not yet functioning
     function clickToAdd(e) {
       var thisMovieImdbId = e.target.id; // grabs movie in search results from id on add button
-      // var thisMovieImdbId = allResults[thisMovieId].imdbID; // grabs proper movie information given correct id
+      // var thisMovieImdbId = allResults[thisMovieClass].imdbID; // grabs proper movie information given correct id
       $.ajax({ // Makes the next api request to get full listing on movie, not just search results (which were abbreviated)
         url: "http://www.omdbapi.com/?i=" + thisMovieImdbId + "&r=json"
       }).done(function(fullMovieListing) {
-
+        allofMovieListing = fullMovieListing;
         fullMovieListing.Poster = "http://img.omdbapi.com/?i=" + thisMovieImdbId + "&apikey=8513e0a1";
         
         // Sends full movie listing, with user login ID, to store on website database
@@ -39,8 +41,28 @@ define(["dependencies", "stars", "grabmovies", "q"],
       });
     }
 
+    function addSearchModal(e) {
+      console.log("e", e);
+      var thisMovieClass = e.currentTarget.classList[2];
+      console.log("thisMovieClass", thisMovieClass);
+
+      $.ajax({ // Makes the next api request to get full listing on movie, not just search results (which were abbreviated)
+        url: "http://www.omdbapi.com/?i=" + thisMovieClass + "&r=json"
+      }).done(function(fullMovieListing) {
+        console.log("omdifullMovieListing", fullMovieListing);
+          // require(['hbs!../templates/modal'], function(modalTemplate) {
+          // console.log("modalTemplate", modalTemplate);
+          //   $("#modal-body").html(modalTemplate(fullMovieListing));
+          // });
+        $("modal-body").html(fullMovieListing.Year);
+        $(".modal-title").html(fullMovieListing.Title);
+        $('#posterModal').modal();
+       });
+    }
+
     return {
       clickToAdd: clickToAdd,
-      populateMovies: populateMovies
+      populateMovies: populateMovies,
+      addSearchModal: addSearchModal
     };
 });
