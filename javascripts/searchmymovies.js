@@ -16,9 +16,9 @@ define(function(require) {
         y.key = key;
       return y;
      });
-    console.log("sortedMovielist", sortedMovielist);
 
-    // This looks at the NAME in each item of the playlit and sorts alphabetically
+
+    // This looks at the Title in each item of the movieList and sorts alphabetically
       sortedMovielist.sort(function(a, b) {
           if (a.Title > b.Title) {
             return 1;
@@ -29,8 +29,6 @@ define(function(require) {
           // a must be equal to b
           return 0;
         });
-
-      console.log("alphabetically ordered sortedMovielist", sortedMovielist);
 
     return sortedMovielist;
 
