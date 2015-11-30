@@ -12,6 +12,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
     var userSearchValue;
     var allResults = {};
     var userMovieLibrary = {};
+    var processedResults;
 
 
     // Enters second page when user authenticates
@@ -60,7 +61,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
             allResults[i].Poster = "http://img.omdbapi.com/?i=" + allResults[i].imdbID + "&apikey=8513e0a1";
           }
 
-          var processedResults = searchMyMovies(searchForThis, userMovieLibrary, allResults);
+          processedResults = searchMyMovies(searchForThis, userMovieLibrary, allResults);
           console.log("processedResults IS THIS AN ARRAY OR OBJECT?", processedResults);
           loadMoviesToPage(processedResults);
 
@@ -139,8 +140,14 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
 
     $('body').on('click', '.myposter', function(event) {
       var movieKey = event.target.getAttribute('key');
-      console.log("movieKey", movieKey); 
-      addModal(auth, movieKey);
+      console.log("movieKey", movieKey);
+      if (processedResults) {
+        var searchMovieKey = processedResults[movieKey];
+        console.log("searchMovieKey", searchMovieKey.Title);
+        addModal(auth, searchMovieKey.Title);
+      } else {
+        addModal(auth, movieKey);
+      }
     });
 
     // Search bar functionality
@@ -206,6 +213,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
   // See All Movies
   $(document).on("click", ".clickAll", function(e){
     userSearchValue = "";
+    processedResults = null;
     beginWebApplication(auth, email, password);
   });
 
