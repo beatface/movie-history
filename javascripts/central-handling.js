@@ -215,7 +215,7 @@ define(function(require) {
   // Rate Movie
   $(document).on('rating.change', function(event, starValue) {
     console.log(starValue);
-    var starKey = event.target.id;
+    var starKey = event.target.getAttribute('title');
     movieChange.rateMovie(starKey, auth, starValue);
   });
 
