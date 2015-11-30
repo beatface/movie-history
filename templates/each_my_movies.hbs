@@ -6,8 +6,10 @@
 		</a>
 	</div>
 	<div class="myposter" id="{{@key}}" key="{{@key}}" imdb="{{imdbID}}">
-		<img class="pull-right" key="{{@key}}" imdb="{{imdbID}}" src="{{Poster}}" onError="
-		this.onerror=null;$(this).parent().html('<h3>{{Title}}</h3>');">
+		<img class="pull-right" key="{{@key}}" imdb="{{imdbID}}" src="{{Poster}}">
+	</div>
+	<div class="error-movie-title {{Title}}">
+		<h3>{{Title}}</h3>
 	</div>
 	<div class="poster-controls">
 		<button id="{{imdbID}}" title="{{Title}}" class="movie-add btn btn-default pull-right">Add</button>
@@ -18,3 +20,6 @@
 	</div>
 </div>
 {{/each}}  
+
+
+{{!-- onError="this.onerror=null;$(this).parent().html('<h3>{{Title}}</h3>');" --}}

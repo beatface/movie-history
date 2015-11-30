@@ -31,6 +31,7 @@ define(["dependencies", "stars", "grabmovies", "q"],
         url: "http://www.omdbapi.com/?i=" + thisMovieImdbId + "&r=json"
       }).done(function(fullMovieListing) {
 
+        // Need If Then Poster
         fullMovieListing.Poster = "http://img.omdbapi.com/?i=" + thisMovieImdbId + "&apikey=8513e0a1";
         
         // Sends full movie listing, with user login ID, to store on website database

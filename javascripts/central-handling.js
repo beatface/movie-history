@@ -40,6 +40,7 @@ define(function(require) {
       $("#results").html(eachMyMoviesTemplate(library)); // handlebars template
       $(".rating").rating(); // stars plugin
 
+      $(".error-movie-title").hide();
       $(".movie-add").hide();
       $(".movie-watch").hide();
       $(".stars").hide();
@@ -71,8 +72,14 @@ define(function(require) {
           allResults = omdbSearchResults.Search;
 
           // Loads proper poster with permissions
+          // Need If Then Poster
           for (var i = 0; i < allResults.length; i++) {
-            allResults[i].Poster = "http://img.omdbapi.com/?i=" + allResults[i].imdbID + "&apikey=8513e0a1";
+            if (allResults[i].Poster === "N/A") {
+              // $(this).parent().html('<h3>{{Title}}</h3>')
+              $("." + allResults[i].Title).show();
+            } else {
+              allResults[i].Poster = "http://img.omdbapi.com/?i=" + allResults[i].imdbID + "&apikey=8513e0a1";
+            }
           }
 
           processedResults = searchMyMovies(searchForThis, userMovieLibrary, allResults);
