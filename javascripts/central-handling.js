@@ -45,6 +45,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
         }
         else {
           $("#" + library[thisMovie].imdbID + ".movie-add").show();
+          $("#" + library[thisMovie].imdbID).addClass('search-result');
         }
       }
     } // Closes function loadMoviesToPage
@@ -225,6 +226,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
     $("div[watchtoggle='true']").show();
     $("div[watchtoggle='false']").hide();
     $("#all-user-title").hide();
+    $(".search-result").parent().hide();
     // beginWebApplication(auth, email, password);
   });
 
@@ -236,6 +238,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
     $("div[watchtoggle='true']").hide();
     $("div[watchtoggle='false']").show();
     $("#all-user-title").hide();
+    $(".search-result").parent().hide();
     // beginWebApplication(auth, email, password);
 
   });
@@ -247,6 +250,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
     $("div[watchtoggle='false']").hide();
     $("div[fave='5']").show();
     $("#all-user-title").hide();
+    $(".search-result").parent().hide();
     // beginWebApplication(auth, email, password);
 
   });
