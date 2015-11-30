@@ -162,10 +162,11 @@ Movie poster styling
    right: 20px;
    background-color: black;
    border-radius: 50%;
-   height: 20px;
-   width: 20px;
+   height: 22px;
+   width: 22px;
    padding-left: 7px;
-   padding-top: 2px;
+   padding-top: 1px;
+   opacity: .7;
 }
 
 .behind {
@@ -195,20 +196,24 @@ Movie poster styling
    }
 }
 
+.pull-right {
+	padding-bottom: 7px;
+}
+
 // Modal Styling
 
 .sizemodal {
 	font-size: 1.8em;
 }
 
-//This is to try and hide any buttons for movies already watched { Noice! - Andri }
-button[watched="true"] {
-  display: none;
-}
+// //This is to try and hide any buttons for movies already watched { Noice! - Andri }
+// button[watched="true"] {
+//   display: none;
+// }
 
-div[watched="false"] {
-  display: none;
-}
+// div[watched="false"] {
+//   display: none;
+// }
 
 //Buttons originally broke at 590px
 @media screen and (max-width: 767px) {

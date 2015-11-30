@@ -1,7 +1,6 @@
 define(function(require) { 
   var _$_ = require("dependencies");
   var authCall = require("authcall");
-  var returnusers = require("return-users");
   var createUserInPrivateFirebase = require("create-user-in-private-firebase");
   var Q = require("q");
   var loadSearch = require("loadSearch");
@@ -17,13 +16,17 @@ define(function(require) {
     
     $(".page").hide(); // on page load, everything is hidden
 
-    $("#entry-screen").show();
+    $("#entry-screen").show(); // presents user with login
 
     var auth;
     var myFirebaseRef = new Firebase("https://ama-moviehistory.firebaseio.com/");
     var email, password;
     var signup = false;
     var userSearchValue;
+    var allResults = {};
+    var userMovieLibrary = {};
+    var processedResults;
+
 
     // Enters second page when user authenticates
     function changePageOnAuth () {
@@ -34,62 +37,81 @@ define(function(require) {
 
     // Applies handlebar template and stars plugin
     function loadMoviesToPage (library) {
-      $("#results").html(eachMyMoviesTemplate(library));
-      $(".rating").rating();
-    }
+      $("#results").html(eachMyMoviesTemplate(library)); // handlebars template
+      $(".rating").rating(); // stars plugin
 
-    function searchUsSomeResults(searchForThis) {
-      usersLibrary(auth) // collects promise from user-library.js
-      .then(function(userUniqueLibrary) {
-        userSearchResults = searchMyMovies(searchForThis, userUniqueLibrary);
-        loadMoviesToPage(userSearchResults); // just slaps handlebars on user's search results
-        console.log("userSearchResults", userSearchResults);
-        return loadSearch.populateMovies(auth, searchForThis);
-      })
-      .then(function(omdbSearchResults) {
-        console.log("omdbSearchResults", omdbSearchResults);
-        $("#results").append(eachMovieTemplate(omdbSearchResults));
-        $(".rating").rating();
-        // test against user's library so we don't populate if already in thing...
-      })
-      .fail(function(error) {
-        console.log("error", error);
+      $(".movie-add").hide();
+      $(".movie-watch").hide();
+      $(".stars").hide();
+      $(".delete-button").hide();
+
+      // Processes what 'Watch State' movie is in, and presents user with relevant buttons
+      for (var thisMovie in library) {
+        if (library[thisMovie].watched === false) {
+          $("#" + library[thisMovie].imdbID + ".delete-button").show();
+          $("#" + library[thisMovie].imdbID + ".movie-watch").show();
+        }
+        else if (library[thisMovie].watched === true) {
+          $("#" + library[thisMovie].imdbID + ".movie-watch").hide();
+          $("#" + library[thisMovie].imdbID + ".delete-button").show();
+          $("#" + library[thisMovie].imdbID + ".stars").show();
+        }
+        else {
+          $("#" + library[thisMovie].imdbID + ".movie-add").show();
+          $("#" + library[thisMovie].imdbID).addClass('search-result');
+        }
+      }
+    } // Closes function loadMoviesToPage
+
+    function searchUsSomeResults(searchForThis, userMovieLibrary) {
+
+      loadSearch.populateMovies(auth, searchForThis) // returns movieSearchResults
+
+        .then(function(omdbSearchResults) {
+          allResults = omdbSearchResults.Search;
+
+          // Loads proper poster with permissions
+          for (var i = 0; i < allResults.length; i++) {
+            allResults[i].Poster = "http://img.omdbapi.com/?i=" + allResults[i].imdbID + "&apikey=8513e0a1";
+          }
+
+          processedResults = searchMyMovies(searchForThis, userMovieLibrary, allResults);
+          loadMoviesToPage(processedResults);
+
+        })
+        .fail(function(error) {
+          console.log("error", error);
       });
     } // END SEARCH OMDB FUNCTION
 
+    // Puts results to DOM, according to which user loads
     function beginWebApplication(thisUserAuth, email, password) {
-      usersLibrary(auth) // receives promise state from user-library.js
-      // Puts results to DOM, according to which user loads
 
-        .then(function(allUserMovies) {
-          var fireurl = "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_" + thisUserAuth +"/";
-          console.log("fireurl", fireurl);
-          var firebaseConnection = new Firebase(fireurl);
-          firebaseConnection.on("value", function(snapshot) {
-            var movie = snapshot.val();
+      var fireurl = "https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_" + thisUserAuth +"/";
+      var firebaseConnection = new Firebase(fireurl);
+      firebaseConnection.on("value", function(snapshot) {
+        userMovieLibrary = snapshot.val();
 
-            loadMoviesToPage(movie);
-            console.log("userSearchValue", userSearchValue);
-            searchUsSomeResults(userSearchValue);
 
-            console.log("movie", movie);
-          }); //End on Value Function
+        // On userMovieLibrary state change, carries thru same search term and keeps page populated.
+        if (userSearchValue) {
+          console.log("if that recognizes search");
+          searchUsSomeResults(userSearchValue, userMovieLibrary);
+        } else {
+          console.log("else that loads page");
+          loadMoviesToPage(userMovieLibrary);
+        }
+      }); //End on Value Function
 
-          // loadMoviesToPage(allUserMovies);
-        }) // End then
-        .fail(function(error) {
-          console.log("error", error);
-        });
     } // closes beginWebApplication function
     
     //Start logout function
     $("#logout-button").click(function(e) {
-      console.log("You have clicked the logout button!", auth);
       if (auth) {
         auth = null;
         myFirebaseRef.unauth();
-        $("#results").html("");
-        $(".page").hide(); // potentially change in future
+        $("#results").html(""); // cleans out user library
+        $(".page").hide(); // turns back to login screen
         $("#entry-screen").show();
       }
     }); //END LOGOUT FUNCTION
@@ -102,7 +124,6 @@ define(function(require) {
       createUserInPrivateFirebase(email, password, myFirebaseRef)
         .then(function(authConfirmNumber) {
           auth = authConfirmNumber.uid;
-          console.log("authConfirm", auth);
           changePageOnAuth();
           beginWebApplication(auth, email, password); // sends to main page functionality
         })
@@ -130,14 +151,15 @@ define(function(require) {
         }); // closes authCall promise
     }); // Closes Login click function
 
-    // when you click on a poster, addModal file gets called and modal appears with movie info.
-    $('body').on('click', '.poster', function(event) {
-      loadSearch.addSearchModal(event);
-    });
-
     $('body').on('click', '.myposter', function(event) {
-      var movieKey = event.target.getAttribute('key'); 
-      addModal(auth, movieKey);
+      var movieKey = event.target.getAttribute('key');
+      var movieID = event.target.getAttribute('imdb');
+      if (processedResults) {
+        var searchMovieKey = processedResults[movieKey];
+        addModal(auth, searchMovieKey.imdbID);
+      } else {
+        addModal(auth, movieID);
+      }
     });
 
     // Search bar functionality
@@ -156,89 +178,97 @@ define(function(require) {
         // If user entered value into search bar
         else {  
           userSearchField.val("");
-          console.log("userInput", userSearchValue);
-          searchUsSomeResults(userSearchValue);
+          searchUsSomeResults(userSearchValue, userMovieLibrary);
         } // closes else
 
       } // closes if user hits enter
     }); // closes keyup
-
-    ////// BELOW HERE, FUNCTIONALITY WILL CHANGE ///////
  
   $("#search-my-movie-library").on("click", function(){
     searchMyMovies(auth); // potentially need userlibrary and title collected on click
 
   }); // closes click function of search my movies
 
+  //////// Movie State Changes ///////
+
+  // Add Movie
   $(document).on("click", ".movie-add", function(e){
-    console.log("You clicked the add button");
     loadSearch.clickToAdd(e);
   });
 
+  // Delete Movie
   $(document).on("click", ".delete-button", function(e){
-    console.log("You clicked the delete button");
     var movieKey = e.target.getAttribute('key');
-    deleteMovie(movieKey, auth)
-    .then(function(){
-      // usersLibrary(auth);
-    });
+    deleteMovie(movieKey, auth);
   });
 
+
+
+  // Watch Movie
   $(document).on("click", ".movie-watch", function(e){
     console.log("You clicked the watch button");
     var movieKey = e.target.getAttribute('key');
-    movieChange.watchMovie(movieKey, auth)
-    .then(function(){
-      // usersLibrary(auth);
-    });
+    movieChange.watchMovie(movieKey, auth);
   });
 
+
+  // Rate Movie
   $(document).on('rating.change', function(event, starValue) {
     console.log(starValue);
     var starKey = event.target.id;
-    console.log("starKey", starKey);
-    movieChange.rateMovie(starKey, auth, starValue)
-    .then(function(){
-      // usersLibrary(auth);
-    });
+    movieChange.rateMovie(starKey, auth, starValue);
   });
 
 
+  // /////// Page Turning on user filtering. ///////
+
+  // See All Movies
   $(document).on("click", ".clickAll", function(e){
-    console.log("You clicked the All button at top");
     userSearchValue = "";
-    usersLibrary(auth)
-    .then(function(allUserMovies) {
-      loadMoviesToPage(allUserMovies);
-      $("#all-user-title").show();
-    });
+    processedResults = null;
+    $("#all-user-title").show();
+    beginWebApplication(auth, email, password);
   });
 
+  // See Watched Movies
   $(document).on("click", ".clickWatch", function(e){
-    console.log("You clicked the WATCHED button at top");
+    userSearchValue = "";
     $("div[watchtoggle='true']").show();
     $("div[watchtoggle='false']").hide();
     $("#all-user-title").hide();
-    $(".search-result").hide();
+    $(".search-result").parent().hide();
+    // beginWebApplication(auth, email, password);
   });
 
+//////// Good ////////
+  // See Unwatched Movies
   $(document).on("click", ".clickUnwatch", function(e){
     console.log("You clicked the UNWATCHED button at top");
+    userSearchValue = "";
     $("div[watchtoggle='true']").hide();
     $("div[watchtoggle='false']").show();
     $("#all-user-title").hide();
-    $(".search-result").hide();
+    $(".search-result").parent().hide();
+    // beginWebApplication(auth, email, password);
+
   });
 
+  // See Favorited Movies
   $(document).on("click", ".clickFave", function(e){
     console.log("You clicked the Fave button at top");
     $("div[watchtoggle='true']").hide();
     $("div[watchtoggle='false']").hide();
     $("div[fave='5']").show();
     $("#all-user-title").hide();
-    $(".search-result").hide();
+    $(".search-result").parent().hide();
+    // beginWebApplication(auth, email, password);
+
   });
 
+
+
+
+
+
+
 });// Close page
-
-
