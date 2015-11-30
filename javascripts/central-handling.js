@@ -198,7 +198,7 @@ define(function(require) {
 
   // Delete Movie
   $(document).on("click", ".delete-button", function(e){
-    var movieKey = e.target.getAttribute('key');
+    var movieKey = e.target.getAttribute('title');
     deleteMovie(movieKey, auth);
   });
 
