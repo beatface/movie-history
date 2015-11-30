@@ -70,18 +70,21 @@ define(function(require) {
         .then(function(omdbSearchResults) {
           allResults = omdbSearchResults.Search;
 
+
           // Loads proper poster with permissions
           for (var i = 0; i < allResults.length; i++) {
             allResults[i].Poster = "http://img.omdbapi.com/?i=" + allResults[i].imdbID + "&apikey=8513e0a1";
           }
 
           processedResults = searchMyMovies(searchForThis, userMovieLibrary, allResults);
+          console.log("processedResults", processedResults);
           loadMoviesToPage(processedResults);
 
         })
-        .fail(function(error) {
-          console.log("error", error);
-      });
+      //   .fail(function(error) {
+      //     console.log("error", error);
+      // })
+        ;
     } // END SEARCH OMDB FUNCTION
 
     // Puts results to DOM, according to which user loads
@@ -207,7 +210,7 @@ define(function(require) {
   // Watch Movie
   $(document).on("click", ".movie-watch", function(e){
     console.log("You clicked the watch button");
-    var movieKey = e.target.getAttribute('key');
+    var movieKey = e.target.getAttribute('title');
     movieChange.watchMovie(movieKey, auth);
   });
 

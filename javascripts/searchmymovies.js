@@ -10,7 +10,7 @@ define(function(require) {
       }
 
     });
-
+    console.log("preferenceLibrary", preferenceLibrary);
     var sortedMovielist = Object.keys(preferenceLibrary).map( function( key ){
         var y = preferenceLibrary[ key ];
         y.key = key;
@@ -45,6 +45,7 @@ define(function(require) {
     // Finds all movies in user's saved library that match search in navbar
     for (var thisMovie in userMovieLibrary) {
       var lowercaseMovie = userMovieLibrary[thisMovie].Title.toLowerCase();
+      console.log("lowercaseMovie", lowercaseMovie);
       if (lowercaseMovie.indexOf(lowercaseSearchValue) > -1) {
         userMatchingSearch[thisMovie] = userMovieLibrary[thisMovie];
       }

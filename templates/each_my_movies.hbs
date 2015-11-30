@@ -10,9 +10,9 @@
 		this.onerror=null;$(this).parent().html('<h3>{{Title}}</h3>');">
 	</div>
 	<div class="poster-controls">
-		<button id="{{imdbID}}" class="movie-add btn btn-default pull-right">Add</button>
-		<button class="movie-watch btn btn-default pull-right" id="{{imdbID}}" watched="{{watched}}" key="{{Title}}">Watch</button>
-		<div id="{{imdbID}}" class="stars pull-right" watched="{{watched}}">
+		<button id="{{imdbID}}" title="{{Title}}" class="movie-add btn btn-default pull-right">Add</button>
+		<button class="movie-watch btn btn-default pull-right" id="{{imdbID}}" title="{{Title}}" watched="{{watched}}" key="{{@key}}">Watch</button>
+		<div id="{{imdbID}}" class="stars pull-right" title="{{Title}}" watched="{{watched}}">
 			<input id="{{@key}}" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false" data-show-caption="false" data-size="xs" value="{{rating}}">
 		</div>
 	</div>
