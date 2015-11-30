@@ -217,6 +217,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
   $(document).on("click", ".clickAll", function(e){
     userSearchValue = "";
     processedResults = null;
+    $("#all-user-title").show();
     beginWebApplication(auth, email, password);
   });
 
