@@ -140,13 +140,15 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q", "loa
 
     $('body').on('click', '.myposter', function(event) {
       var movieKey = event.target.getAttribute('key');
+      var movieID = event.target.getAttribute('imdb');
       console.log("movieKey", movieKey);
+      console.log("movieID", movieID);
       if (processedResults) {
         var searchMovieKey = processedResults[movieKey];
-        console.log("searchMovieKey", searchMovieKey.Title);
-        addModal(auth, searchMovieKey.Title);
+        console.log("searchMovieKey", searchMovieKey.imdbID);
+        addModal(auth, searchMovieKey.imdbID);
       } else {
-        addModal(auth, movieKey);
+        addModal(auth, movieID);
       }
     });
 
