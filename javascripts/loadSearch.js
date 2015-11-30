@@ -32,7 +32,9 @@ define(["dependencies", "stars", "grabmovies", "q"],
       }).done(function(fullMovieListing) {
 
         // Need If Then Poster
-        fullMovieListing.Poster = "http://img.omdbapi.com/?i=" + thisMovieImdbId + "&apikey=8513e0a1";
+        if (fullMovieListing.Poster !== "N/A") {
+          fullMovieListing.Poster = "http://img.omdbapi.com/?i=" + thisMovieImdbId + "&apikey=8513e0a1";
+        }
         
         // Sends full movie listing, with user login ID, to store on website database
         grabmovies.findMovie(fullMovieListing, authInfo);

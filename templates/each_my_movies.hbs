@@ -5,12 +5,14 @@
 			<span key="{{@key}}" title="{{Title}}">&times;</span>
 		</a>
 	</div>
-	<div class="myposter" id="{{@key}}" key="{{@key}}" imdb="{{imdbID}}">
+
+	<div class="myposter" id="{{@key}} {{imdbID}}" key="{{@key}}" imdb="{{imdbID}}">
 		<img class="pull-right" key="{{@key}}" imdb="{{imdbID}}" src="{{Poster}}">
+		<div id="{{imdbID}}yo" class="error-movie-title">
+			<h3>{{Title}}</h3>
+		</div>
 	</div>
-	<div class="error-movie-title {{Title}}">
-		<h3>{{Title}}</h3>
-	</div>
+
 	<div class="poster-controls">
 		<button id="{{imdbID}}" title="{{Title}}" class="movie-add btn btn-default pull-right">Add</button>
 		<button class="movie-watch btn btn-default pull-right" id="{{imdbID}}" watched="{{watched}}" title="{{Title}}" key="{{@key}}">Watch</button>

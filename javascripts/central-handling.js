@@ -46,6 +46,16 @@ define(function(require) {
       $(".stars").hide();
       $(".delete-button").hide();
 
+      // Testing if poster is N/A, and showing movie title instead.
+      for (var eachMovie in library) {
+        if (library[eachMovie].Poster === "N/A") {
+          $(".pull-right[imdb=" + library[eachMovie].imdbID + "]").hide();
+          console.log("RAWR", $("#" + library[eachMovie].imdbID + "yo"));
+          $("#" + library[eachMovie].imdbID + "yo").show();
+        }
+      }
+
+
       // Processes what 'Watch State' movie is in, and presents user with relevant buttons
       for (var thisMovie in library) {
         if (library[thisMovie].watched === false) {
@@ -74,10 +84,7 @@ define(function(require) {
           // Loads proper poster with permissions
           // Need If Then Poster
           for (var i = 0; i < allResults.length; i++) {
-            if (allResults[i].Poster === "N/A") {
-              // $(this).parent().html('<h3>{{Title}}</h3>')
-              $("." + allResults[i].Title).show();
-            } else {
+            if (allResults[i].Poster !== "N/A") {
               allResults[i].Poster = "http://img.omdbapi.com/?i=" + allResults[i].imdbID + "&apikey=8513e0a1";
             }
           }
