@@ -207,7 +207,7 @@ define(function(require) {
   // Watch Movie
   $(document).on("click", ".movie-watch", function(e){
     console.log("You clicked the watch button");
-    var movieKey = e.target.getAttribute('key');
+    var movieKey = e.target.getAttribute('title');
     movieChange.watchMovie(movieKey, auth);
   });
 

@@ -3,6 +3,7 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q"],
 
 return {
     findMovie: function(moviedata, userID) {
+    	console.log("moviedata", moviedata);
       var thisUserLibrary = new Firebase("https://ama-moviehistory.firebaseio.com/all-users-libraries/user_library_" + userID);
       var userMovieInLibrary = thisUserLibrary.child(moviedata.Title);
       moviedata.rating = 0;
