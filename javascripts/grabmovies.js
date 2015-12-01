@@ -8,7 +8,6 @@ define(["dependencies", "authcall", "create-user-in-private-firebase", "q"],
       var userMovieInLibrary = thisUserLibrary.child(moviedata.Title);
       moviedata.rating = 0;
       moviedata.watched = false;
-      moviedata.deleted = false;
 
       userMovieInLibrary.set(moviedata);
     }

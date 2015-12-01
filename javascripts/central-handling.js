@@ -4,7 +4,6 @@ define(function(require) {
   var createUserInPrivateFirebase = require("create-user-in-private-firebase");
   var Q = require("q");
   var loadSearch = require("loadSearch");
-  var usersLibrary = require("user-library");
   var deleteMovie = require("delete-movie");
   var movieChange = require("movie-change");
   var userSignUp = require("user-sign-up");
@@ -12,7 +11,6 @@ define(function(require) {
   var searchMyMovies = require("searchmymovies");
   var addModal = require("add-modal");
   var eachMyMoviesTemplate = require("hbs!../templates/each_my_movies");
-  var eachMovieTemplate = require("hbs!../templates/each_movie");
     
     $(".page").hide(); // on page load, everything is hidden
 
@@ -209,6 +207,7 @@ define(function(require) {
   $(document).on("click", ".movie-add", function(e){
     loadSearch.clickToAdd(e);
   });
+
 
   // Delete Movie
   $(document).on("click", ".delete-button", function(e){

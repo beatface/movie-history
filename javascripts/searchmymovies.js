@@ -1,5 +1,4 @@
 define(function(require) { 
-  var usersLibrary = require("user-library");
   var _$_ = require("dependencies");
 
   function reconcileLibraries (preferenceLibrary, secondaryLibraryCollection) {
